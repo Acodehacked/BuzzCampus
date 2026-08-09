@@ -25,108 +25,152 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".env.example",
-        "hash": "16219353608393898702"
-      },
-      {
-        "file": "schema.ts",
-        "hash": "11727469964143703918"
+        "file": "package-lock.json",
+        "hash": "3736080359999357676"
       },
       {
         "file": "package.json",
         "hash": "11167407003127101259"
       },
       {
-        "file": "scripts/seed.mts",
-        "hash": "9835303859782379544"
-      },
-      {
-        "file": "globals.css",
-        "hash": "12034264586271930419"
-      },
-      {
-        "file": "docs/ARCHITECTURE.md",
-        "hash": "14403268010336438767"
-      },
-      {
-        "file": "scripts/migrate.mjs",
-        "hash": "13465166708325858567"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "7071996166724889697"
-      },
-      {
         "file": "docker-entrypoint.sh",
         "hash": "10949061703129557134"
-      },
-      {
-        "file": "docs/BUILD_PLAN.md",
-        "hash": "9938770794201837375"
-      },
-      {
-        "file": "CLAUDE.md",
-        "hash": "16134674678241035431"
       },
       {
         "file": "tsconfig.base.json",
         "hash": "5754650927598303120"
       },
       {
-        "file": "Buzz_Complete_PRD.md",
-        "hash": "10220418756604540923"
+        "file": "docs/screenshots/README.md",
+        "hash": "93220932492752681"
+      },
+      {
+        "file": "docs/screenshots/profile.png",
+        "hash": "6290970353192048922"
+      },
+      {
+        "file": "scripts/seed.mts",
+        "hash": "9835303859782379544"
+      },
+      {
+        "file": "docs/screenshots/hero.png",
+        "hash": "8912077807004938749"
       },
       {
         "file": "Dockerfile",
         "hash": "7451656278145667688"
       },
       {
-        "file": "nx.json",
-        "hash": "14670132124483104828"
+        "file": "docs/ARCHITECTURE.md",
+        "hash": "14403268010336438767"
       },
       {
-        "file": "HOWTOHOST.md",
-        "hash": "7192107132397258656"
-      },
-      {
-        "file": "README.md",
-        "hash": "3369714621364422324"
+        "file": "docs/screenshots/feed.png",
+        "hash": "16063366638214961856"
       },
       {
         "file": "docs/PRD.md",
         "hash": "10220418756604540923"
       },
       {
-        "file": ".gitignore",
-        "hash": "11627161708463498695"
+        "file": "DESIGN_SYSTEM.md",
+        "hash": "10531337959359986093"
+      },
+      {
+        "file": "HOWTOHOST.md",
+        "hash": "7192107132397258656"
       },
       {
         "file": "docs/DESIGN_SYSTEM.md",
         "hash": "10531337959359986093"
       },
       {
+        "file": "globals.css",
+        "hash": "12034264586271930419"
+      },
+      {
+        "file": "docs/screenshots/landing.png",
+        "hash": "10054705361802434435"
+      },
+      {
+        "file": "docs/screenshots/trust.png",
+        "hash": "13900770057687581821"
+      },
+      {
         "file": "vitest.config.ts",
         "hash": "7812567901636579527"
       },
       {
-        "file": "package-lock.json",
-        "hash": "3736080359999357676"
+        "file": "docs/screenshots/post-detail.png",
+        "hash": "15065720083089152857"
       },
       {
-        "file": "docs/screenshots/README.md",
-        "hash": "93220932492752681"
+        "file": "schema.ts",
+        "hash": "11727469964143703918"
+      },
+      {
+        "file": "Buzz_Complete_PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": "docs/screenshots/admin.png",
+        "hash": "8492526365653266303"
       },
       {
         "file": "tailwind.config.ts",
         "hash": "6696237629310940894"
       },
       {
+        "file": "docs/BUILD_PLAN.md",
+        "hash": "9938770794201837375"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "7071996166724889697"
+      },
+      {
+        "file": ".env.example",
+        "hash": "16219353608393898702"
+      },
+      {
+        "file": "docs/screenshots/onboarding.png",
+        "hash": "13908814139090594820"
+      },
+      {
         "file": "docker-compose.yml",
         "hash": "2249984800845579397"
       },
       {
-        "file": "DESIGN_SYSTEM.md",
-        "hash": "10531337959359986093"
+        "file": "docs/screenshots/wallet.png",
+        "hash": "14527185599376183289"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "11627161708463498695"
+      },
+      {
+        "file": "README.md",
+        "hash": "3369714621364422324"
+      },
+      {
+        "file": "CLAUDE.md",
+        "hash": "16134674678241035431"
+      },
+      {
+        "file": "docs/screenshots/tour.png",
+        "hash": "9693367316412748991"
+      },
+      {
+        "file": "nx.json",
+        "hash": "14670132124483104828"
+      },
+      {
+        "file": "docs/screenshots/builds.png",
+        "hash": "3749399527311359049"
+      },
+      {
+        "file": "scripts/migrate.mjs",
+        "hash": "13465166708325858567"
       }
     ],
     "projectFileMap": {
