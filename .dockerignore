@@ -1,0 +1,26 @@
+# Keep the build context small and, more importantly, keep secrets out of
+# the image. .env is listed here deliberately — production configuration
+# comes from the platform's environment variables, never from a baked file.
+node_modules
+**/node_modules
+.next
+**/.next
+out
+dist
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.nx
+coverage
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md
+HOWTOHOST.md
+docs
+.vscode
+.idea
+.DS_Store

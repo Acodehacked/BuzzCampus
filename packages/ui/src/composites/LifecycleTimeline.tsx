@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
 import { categoryTokens, statusTokens } from "../utils/category";
+import { formatStamp } from "../utils/time";
 
 /**
  * The shared lifecycle timeline — docs/DESIGN_SYSTEM.md §5, signature
@@ -164,13 +165,3 @@ export function LifecycleTimeline({
   );
 }
 
-function formatStamp(value: Date | string): string {
-  const date = typeof value === "string" ? new Date(value) : value;
-  if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleString(undefined, {
-    day: "2-digit",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}

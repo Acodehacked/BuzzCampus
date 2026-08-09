@@ -1,12 +1,16 @@
 // Tests for the rest of the shared rules: scarcity, SLA, the one Buzz
 // Score's tiering, the sensitive-report policy, and the compose validation.
 
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { computeMultiplier, scarcitySpread, SCARCITY_CEILING, SCARCITY_FLOOR } from "../scarcity";
 import { computeSla, formatSlaRemaining, slaHoursFor } from "../sla";
 import { pointsToNextTier, tierFor } from "../score";
 import { canSeeAuthorIdentity, canSeePost, redactAuthor } from "../policy";
-import { createPostSchema, isCampusEmail } from "../validation";
+import {
+  campusEmailMessage,
+  createPostSchema,
+  isCampusEmail,
+} from "../validation";
 import { explainRank, haversine } from "../ranking";
 
 describe("scarcity index", () => {
@@ -224,24 +228,196 @@ describe("compose validation", () => {
 });
 
 describe("campus email restriction", () => {
-  it("accepts academic domains by default", () => {
-    expect(isCampusEmail("a@university.edu")).toBe(true);
-    expect(isCampusEmail("a@dept.university.edu")).toBe(true);
-    expect(isCampusEmail("a@college.ac.in")).toBe(true);
+  // isCampusEmail reads its config at call time, and the developer's own
+  // .env sets CAMPUS_EMAIL_DOMAINS — so each case has to state the config
+  // it's actually testing rather than inheriting the ambient one.
+  const originalDomains = process.env.CAMPUS_EMAIL_DOMAINS;
+  const originalMode = process.env.CAMPUS_EMAIL_MODE;
+
+  const restore = (key: string, value: string | undefined) => {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  };
+
+  afterEach(() => {
+    restore("CAMPUS_EMAIL_DOMAINS", originalDomains);
+    restore("CAMPUS_EMAIL_MODE", originalMode);
   });
 
-  it("rejects everything else", () => {
-    expect(isCampusEmail("a@gmail.com")).toBe(false);
-    expect(isCampusEmail("not-an-email")).toBe(false);
-    expect(isCampusEmail("")).toBe(false);
-  });
-
-  it("honours an explicit allowlist", () => {
-    process.env.CAMPUS_EMAIL_DOMAINS = "buzzcampus.test";
-    expect(isCampusEmail("a@buzzcampus.test")).toBe(true);
-    expect(isCampusEmail("a@cse.buzzcampus.test")).toBe(true);
-    expect(isCampusEmail("a@university.edu")).toBe(false);
+  const useDefault = () => {
     delete process.env.CAMPUS_EMAIL_DOMAINS;
+    delete process.env.CAMPUS_EMAIL_MODE;
+  };
+
+  describe("allowlist mode", () => {
+    it("accepts the configured domain and its subdomains", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "sjcetpalai.ac.in";
+      expect(isCampusEmail("abinantony2028@sjcetpalai.ac.in")).toBe(true);
+      // The real-world shape: department subdomains under the college.
+      expect(isCampusEmail("abinantony2028@es.sjcetpalai.ac.in")).toBe(true);
+      expect(isCampusEmail("a@cse.sjcetpalai.ac.in")).toBe(true);
+    });
+
+    it("rejects other institutions", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "sjcetpalai.ac.in";
+      expect(isCampusEmail("a@university.edu")).toBe(false);
+      expect(isCampusEmail("a@othercollege.ac.in")).toBe(false);
+    });
+
+    it("does not let a lookalike domain sneak past the suffix check", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "sjcetpalai.ac.in";
+      expect(isCampusEmail("a@notsjcetpalai.ac.in")).toBe(false);
+      expect(isCampusEmail("a@sjcetpalai.ac.in.evil.com")).toBe(false);
+    });
+
+    it("accepts several domains, and tolerates a leading @", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "@a.edu, b.ac.uk";
+      expect(isCampusEmail("x@a.edu")).toBe(true);
+      expect(isCampusEmail("x@b.ac.uk")).toBe(true);
+      expect(isCampusEmail("x@c.edu")).toBe(false);
+    });
+  });
+
+  describe("academic mode", () => {
+    beforeEach(() => {
+      delete process.env.CAMPUS_EMAIL_DOMAINS;
+      process.env.CAMPUS_EMAIL_MODE = "academic";
+    });
+
+    it("accepts academic markers from around the world", () => {
+      for (const domain of [
+        "university.edu",
+        "es.sjcetpalai.ac.in",
+        "ox.ac.uk",
+        "u-tokyo.ac.jp",
+        "iiit.edu.in",
+        "unsw.edu.au",
+        "uni-heidelberg.de",
+        "univ-lyon1.fr",
+        "students.someplace.org",
+      ]) {
+        expect(isCampusEmail(`a@${domain}`), domain).toBe(true);
+      }
+    });
+
+    it("rejects domains with no academic marker, even real universities", () => {
+      // This is the documented cost of academic mode — ETH Zürich and TU
+      // Delft carry no marker, which is exactly why it isn't the default.
+      expect(isCampusEmail("a@ethz.ch")).toBe(false);
+      expect(isCampusEmail("a@tudelft.nl")).toBe(false);
+    });
+
+    it("still rejects consumer mail", () => {
+      expect(isCampusEmail("a@gmail.com")).toBe(false);
+    });
+  });
+
+  describe("default (non-consumer) mode", () => {
+    it("accepts any college on earth, marker or not", () => {
+      useDefault();
+      for (const domain of [
+        "es.sjcetpalai.ac.in", // India
+        "university.edu", // US
+        "ox.ac.uk", // UK
+        "ethz.ch", // Switzerland — no academic marker
+        "tudelft.nl", // Netherlands
+        "mcgill.ca", // Canada
+        "unibo.it", // Italy
+        "kth.se", // Sweden
+        "u-tokyo.ac.jp", // Japan
+        "usp.br", // Brazil
+      ]) {
+        expect(isCampusEmail(`a@${domain}`), domain).toBe(true);
+      }
+    });
+
+    it("rejects the consumer providers students actually have", () => {
+      useDefault();
+      for (const domain of [
+        "gmail.com",
+        "googlemail.com",
+        "yahoo.com",
+        "yahoo.co.in",
+        "hotmail.com",
+        "hotmail.co.uk",
+        "outlook.com",
+        "outlook.com.br",
+        "live.co.uk",
+        "icloud.com",
+        "proton.me",
+        "protonmail.com",
+        "rediffmail.com",
+        "qq.com",
+        "163.com",
+        "mail.ru",
+        "yandex.ru",
+        "web.de",
+      ]) {
+        expect(isCampusEmail(`a@${domain}`), domain).toBe(false);
+      }
+    });
+
+    it("rejects disposable inboxes", () => {
+      useDefault();
+      expect(isCampusEmail("a@mailinator.com")).toBe(false);
+      expect(isCampusEmail("a@yopmail.com")).toBe(false);
+      expect(isCampusEmail("a@10minutemail.net")).toBe(false);
+    });
+
+    // The bug a naive prefix match would introduce: plenty of universities
+    // host mail on mail.<college>, and yahoo/live are ordinary words.
+    it("does not mistake a university mail host for a consumer provider", () => {
+      useDefault();
+      expect(isCampusEmail("a@mail.sjcetpalai.ac.in")).toBe(true);
+      expect(isCampusEmail("a@mail.university.edu")).toBe(true);
+      expect(isCampusEmail("a@live.university.edu")).toBe(true);
+      expect(isCampusEmail("a@webmail.unibo.it")).toBe(true);
+    });
+  });
+
+  describe("malformed input", () => {
+    it("rejects anything that isn't one address", () => {
+      useDefault();
+      expect(isCampusEmail("not-an-email")).toBe(false);
+      expect(isCampusEmail("")).toBe(false);
+      expect(isCampusEmail("@university.edu")).toBe(false);
+      expect(isCampusEmail("a@")).toBe(false);
+      expect(isCampusEmail("a@b@university.edu")).toBe(false);
+      expect(isCampusEmail("a@localhost")).toBe(false);
+      expect(isCampusEmail("a@.university.edu")).toBe(false);
+      expect(isCampusEmail("a@university.edu.")).toBe(false);
+    });
+  });
+
+  it("ignores an empty allowlist and falls back to the default", () => {
+    process.env.CAMPUS_EMAIL_DOMAINS = "";
+    delete process.env.CAMPUS_EMAIL_MODE;
+    expect(isCampusEmail("a@ethz.ch")).toBe(true);
+    expect(isCampusEmail("a@gmail.com")).toBe(false);
+  });
+
+  describe("the message shown on rejection", () => {
+    it("names the domain when there's one to name", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "sjcetpalai.ac.in";
+      expect(campusEmailMessage()).toContain("@sjcetpalai.ac.in");
+    });
+
+    it("reads as a sentence with two", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "sjcetpalai.ac.in,ajce.ac.in";
+      expect(campusEmailMessage()).toContain("@sjcetpalai.ac.in or @ajce.ac.in");
+    });
+
+    it("stops listing once the list stops helping", () => {
+      process.env.CAMPUS_EMAIL_DOMAINS = "a.edu,b.edu,c.edu,d.edu,e.edu";
+      const message = campusEmailMessage();
+      expect(message).not.toContain("@a.edu");
+      expect(message).toContain("institutional email");
+    });
+
+    it("explains the default rule in the default mode", () => {
+      useDefault();
+      expect(campusEmailMessage()).toContain("personal email");
+    });
   });
 });
 

@@ -18,12 +18,16 @@
     "db:generate": "npm run generate --workspace=@buzz/db",
     "db:push": "npm run push --workspace=@buzz/db",
     "db:migrate": "npm run migrate --workspace=@buzz/db",
-    "db:seed": "npm run seed --workspace=@buzz/db",
-    "db:studio": "npm run studio --workspace=@buzz/db"
+    "db:seed": "tsx scripts/seed.mts",
+    "db:studio": "npm run studio --workspace=@buzz/db",
+    "setup": "npm install && npm run db:push && npm run db:seed"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.20.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.6.1",
     "nx": "^20.3.1",
+    "tsx": "^4.23.11",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"
   },

@@ -372,10 +372,6 @@
       "packages/db/package.json",
       "nx/core/package-json"
     ],
-    "metadata.targetGroups.NPM Scripts.4": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
     "metadata.js": [
       "packages/db/package.json",
       "nx/core/package-json"
@@ -481,34 +477,6 @@
       "nx/core/package-json"
     ],
     "targets.migrate.metadata.runCommand": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.executor": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.options": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.metadata": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.options.script": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.metadata.scriptContent": [
-      "packages/db/package.json",
-      "nx/core/package-json"
-    ],
-    "targets.seed.metadata.runCommand": [
       "packages/db/package.json",
       "nx/core/package-json"
     ],

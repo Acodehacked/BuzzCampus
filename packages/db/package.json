@@ -14,7 +14,6 @@
     "generate": "drizzle-kit generate",
     "push": "drizzle-kit push",
     "migrate": "tsx src/migrate.ts",
-    "seed": "tsx src/seed.ts",
     "studio": "drizzle-kit studio"
   },
   "dependencies": {

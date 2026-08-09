@@ -10,3 +10,18 @@
 [NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.306Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (sources)
 [NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.308Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (outputs)
 [NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.309Z - Server stopped because: "Request to shutdown"
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.256Z - Started listening on: \\.\pipe\nx\C:\Users\abina\AppData\Local\Temp\a96a07e680951a87c546\d.sock
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.281Z - [WATCHER]: Subscribed to changes within: E:\PROJECTS\BuzzCampus (native)
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.287Z - Established a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.289Z - Established a connection. Number of open connections: 2
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.293Z - Closed a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.299Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.303Z - Done responding to the client Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.303Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 4.
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.304Z - Closed a connection. Number of open connections: 0
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.306Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (sources)
+
+> NX runtime error err=cannot send event from fs watcher: sending into a closed channel
+
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.309Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (outputs)
+[NX v20.8.4 Daemon Server] - 2026-08-09T05:41:34.312Z - Server stopped because: "Request to shutdown"

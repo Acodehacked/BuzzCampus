@@ -15,6 +15,15 @@ const describeDb = TEST_DB ? describe : describe.skip;
 
 if (TEST_DB) process.env.DATABASE_URL = TEST_DB;
 
+// packages/db hands out ONE pooled connection per process. Closing it in a
+// per-suite afterAll would pull it out from under the suites that follow,
+// so teardown happens once, here, after everything in the file.
+afterAll(async () => {
+  if (!TEST_DB) return;
+  const { sql } = await import("@buzz/db");
+  await sql.end({ timeout: 5 }).catch(() => undefined);
+});
+
 describeDb("transferCredits (transactional)", () => {
   let db: typeof import("@buzz/db").db;
   let schema: typeof import("@buzz/db");
@@ -43,10 +52,6 @@ describeDb("transferCredits (transactional)", () => {
       { userId: alice, balance: "10.00" },
       { userId: bob, balance: "0.00" },
     ]);
-  });
-
-  afterAll(async () => {
-    await schema.sql.end({ timeout: 5 });
   });
 
   it("moves credits and writes one ledger row per side", async () => {
@@ -141,10 +146,6 @@ describeDb("transitionPost (transactional)", () => {
       })
       .returning();
     postId = p!.id;
-  });
-
-  afterAll(async () => {
-    await schema.sql.end({ timeout: 5 });
   });
 
   it("locks escrow when the post is accepted", async () => {

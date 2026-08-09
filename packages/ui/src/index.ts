@@ -8,6 +8,7 @@
 
 export * from "./utils/cn";
 export * from "./utils/category";
+export * from "./utils/time";
 
 export * from "./primitives/Button";
 export * from "./primitives/Input";

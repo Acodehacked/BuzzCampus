@@ -99,7 +99,19 @@ export async function transitionPost(
     if (!ALLOWED_TRANSITIONS[from].includes(to)) {
       throw invalidTransition(from, to);
     }
-    assertActorMayTransition(current, input.actor, to, input.attachmentUrl);
+    // Resolved before the authorisation check, because whether a move is
+    // allowed depends on WHO the other party is, not just who is clicking.
+    const counterparty =
+      input.counterpartyId ??
+      (await findCounterparty(tx, current.id, input.actor.id));
+
+    assertActorMayTransition(
+      current,
+      input.actor,
+      to,
+      input.attachmentUrl,
+      counterparty,
+    );
 
     // 3 — append to the audit trail. Append-only: postEvents rows are
     //     never updated or deleted anywhere in this codebase.
@@ -139,8 +151,7 @@ export async function transitionPost(
       post: updated,
       from,
       to,
-      actor: input.actor,
-      counterpartyId: input.counterpartyId,
+      counterparty,
     });
 
     return { post: updated, event, credits };
@@ -161,6 +172,8 @@ export function assertActorMayTransition(
   actor: Actor,
   to: PostStatus,
   attachmentUrl?: string,
+  /** the other side of the exchange, once it's known */
+  counterpartyId?: string | null,
 ) {
   const isAuthor = post.authorId === actor.id;
   const isAdmin = actor.role === "admin";
@@ -176,9 +189,12 @@ export function assertActorMayTransition(
   switch (to) {
     case "accepted":
     case "in_progress":
-      // anyone can offer to help; the author can't accept their own post
-      if (isAuthor && post.type === "ask") {
-        throw forbidden("You can't accept your own Ask");
+      // The author accepting someone's offer is the MAIN flow, so the
+      // check here is on the counterparty, not the actor: what's barred is
+      // self-dealing — being the person who fulfils your own post — not
+      // being the person who clicks accept.
+      if (counterpartyId && counterpartyId === post.authorId) {
+        throw forbidden("You can't be the one who fulfils your own post");
       }
       break;
 
@@ -228,16 +244,12 @@ async function applySideEffects(
     post: Post;
     from: PostStatus;
     to: PostStatus;
-    actor: Actor;
-    counterpartyId?: string;
+    counterparty: string | null;
   },
 ): Promise<TransitionResult["credits"]> {
-  const { post, from, to, actor } = args;
+  const { post, from, to, counterparty } = args;
   const amount = post.creditAmount;
   const hasCredits = isPositive(amount);
-
-  const counterparty =
-    args.counterpartyId ?? (await findCounterparty(tx, post.id, actor.id));
 
   const { payerId, payeeId } = resolveParties(post, counterparty);
 

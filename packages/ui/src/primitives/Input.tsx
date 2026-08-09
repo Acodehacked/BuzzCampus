@@ -20,12 +20,15 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;
   /** renders in the mono face — post IDs, amounts, codes */
   mono?: boolean;
-  prefix?: ReactNode;
+  /** a static adornment inside the field (a unit, a `@`, a currency mark).
+   *  Named `leading` rather than `prefix` because the DOM's own `prefix`
+   *  attribute is a string and would clash. */
+  leading?: ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, invalid, mono, prefix, ...props }, ref) => {
-    if (prefix) {
+  ({ className, invalid, mono, leading, ...props }, ref) => {
+    if (leading) {
       return (
         <div
           className={cn(
@@ -35,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className,
           )}
         >
-          <span className="shrink-0 text-xs text-text-muted">{prefix}</span>
+          <span className="shrink-0 text-xs text-text-muted">{leading}</span>
           <input
             ref={ref}
             className={cn(

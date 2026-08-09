@@ -2,7 +2,7 @@
 
 import { cn } from "../utils/cn";
 import { CreditAmount } from "../primitives/Badge";
-import { relativeTime } from "./PostCard";
+import { relativeTime } from "../utils/time";
 
 /**
  * One ledger line. Every credit movement on the platform produced one of

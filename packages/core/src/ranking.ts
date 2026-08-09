@@ -30,6 +30,21 @@ const RECENCY_TAU = 172_800;
 const PROXIMITY_RADIUS_M = 1_500;
 
 /**
+ * Binds a string list as a real Postgres text[].
+ *
+ * Interpolating the JS array directly (`${tags}::text[]`) does NOT work:
+ * Drizzle binds it as one parameter and Postgres rejects it with
+ * "malformed array literal". Each element has to be its own bound
+ * parameter — which is also the injection-safe form.
+ */
+function textArray(values: string[]): SQL {
+  return sql`ARRAY[${sql.join(
+    values.map((value) => sql`${value}`),
+    sql`, `,
+  )}]::text[]`;
+}
+
+/**
  * Builds a single numeric relevance score as a SQL expression, so ranking
  * happens in Postgres over an index rather than by pulling rows into Node
  * and sorting them there.
@@ -86,7 +101,7 @@ export function feedRankExpression(viewer: ViewerContext): SQL<number> {
   if (tags.length > 0) {
     parts.push(sql`
       CASE WHEN ${posts.category} = 'skills'
-                AND LOWER(${posts.metadata}->>'skillTag') = ANY(${tags}::text[])
+                AND LOWER(${posts.metadata}->>'skillTag') = ANY(${textArray(tags)})
       THEN 40 ELSE 0 END
     `);
 
@@ -100,7 +115,7 @@ export function feedRankExpression(viewer: ViewerContext): SQL<number> {
                 AND EXISTS (
                   SELECT 1
                   FROM jsonb_array_elements_text(${posts.metadata}->'requiredTags') AS rt
-                  WHERE LOWER(rt) = ANY(${tags}::text[])
+                  WHERE LOWER(rt) = ANY(${textArray(tags)})
                 )
       THEN 45 ELSE 0 END
     `);

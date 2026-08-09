@@ -5,9 +5,10 @@
 // packages/core function (docs/ARCHITECTURE.md, package boundary rules).
 
 import { initTRPC, TRPCError } from "@trpc/server";
+import { eq } from "drizzle-orm";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { db, type Role } from "@buzz/db";
+import { db, users, type Role } from "@buzz/db";
 import { BuzzError, canOpenAdminConsole, type Viewer } from "@buzz/core";
 import { auth } from "./auth";
 
@@ -17,20 +18,37 @@ export type Context = {
   headers: Headers;
 };
 
+/**
+ * Resolves the viewer from the session token, then confirms against the
+ * database.
+ *
+ * The extra lookup is one indexed primary-key read, and it buys two things
+ * a JWT alone can't give: a token for a user who no longer exists is
+ * treated as signed out rather than as a ghost who can read pages but
+ * fails every write, and a role change takes effect on the next request
+ * instead of the next sign-in — which matters when the role being revoked
+ * is `admin` or `safety`.
+ */
 export async function createContext(opts: { headers: Headers }): Promise<Context> {
   const session = await auth();
 
-  return {
-    db,
-    viewer: session?.user?.id
-      ? {
-          id: session.user.id,
-          role: session.user.role,
-          department: session.user.department,
-        }
-      : null,
-    headers: opts.headers,
-  };
+  let viewer: Viewer = null;
+
+  if (session?.user?.id) {
+    const [current] = await db
+      .select({
+        id: users.id,
+        role: users.role,
+        department: users.department,
+      })
+      .from(users)
+      .where(eq(users.id, session.user.id))
+      .limit(1);
+
+    viewer = current ?? null;
+  }
+
+  return { db, viewer, headers: opts.headers };
 }
 
 const BUZZ_TO_TRPC: Record<BuzzError["code"], TRPCError["code"]> = {

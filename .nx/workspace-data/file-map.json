@@ -24,10 +24,409 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "@buzz/ui": [
+      "@buzz/core": [
         {
-          "file": "packages/ui/package.json",
-          "hash": "322080224694591143"
+          "file": "packages/core/package.json",
+          "hash": "7571571104856244547",
+          "deps": [
+            "npm:vitest",
+            "@buzz/db",
+            "npm:drizzle-orm",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/core/src/__tests__/integration.test.ts",
+          "hash": "5809599039628234963"
+        },
+        {
+          "file": "packages/core/src/__tests__/ledger.test.ts",
+          "hash": "17504728875221228589"
+        },
+        {
+          "file": "packages/core/src/__tests__/lifecycle.test.ts",
+          "hash": "18039856779655820188"
+        },
+        {
+          "file": "packages/core/src/__tests__/rules.test.ts",
+          "hash": "3502293803418326797"
+        },
+        {
+          "file": "packages/core/src/client.ts",
+          "hash": "620018627421338775"
+        },
+        {
+          "file": "packages/core/src/constants.ts",
+          "hash": "17746724048133409219"
+        },
+        {
+          "file": "packages/core/src/digest.ts",
+          "hash": "9206442829886439666"
+        },
+        {
+          "file": "packages/core/src/errors.ts",
+          "hash": "3272213300981019987"
+        },
+        {
+          "file": "packages/core/src/index.ts",
+          "hash": "9196428956227631044"
+        },
+        {
+          "file": "packages/core/src/ledger.ts",
+          "hash": "16996473435963642235"
+        },
+        {
+          "file": "packages/core/src/lifecycle.ts",
+          "hash": "13379012770398191645"
+        },
+        {
+          "file": "packages/core/src/money.ts",
+          "hash": "5842269977863875116"
+        },
+        {
+          "file": "packages/core/src/policy.ts",
+          "hash": "4034669740127058617"
+        },
+        {
+          "file": "packages/core/src/ranking.ts",
+          "hash": "9134450203432275011"
+        },
+        {
+          "file": "packages/core/src/scarcity.ts",
+          "hash": "2942135952784166900"
+        },
+        {
+          "file": "packages/core/src/score.ts",
+          "hash": "10967478180535689298"
+        },
+        {
+          "file": "packages/core/src/sla.ts",
+          "hash": "8780373334141141848"
+        },
+        {
+          "file": "packages/core/src/validation/auth.ts",
+          "hash": "6621658952517400943"
+        },
+        {
+          "file": "packages/core/src/validation/build.ts",
+          "hash": "9409438486458659387"
+        },
+        {
+          "file": "packages/core/src/validation/index.ts",
+          "hash": "15440673825188780319"
+        },
+        {
+          "file": "packages/core/src/validation/post.ts",
+          "hash": "3607826061855964356"
+        }
+      ],
+      "@buzz/web": [
+        {
+          "file": "apps/web/app/(auth)/layout.tsx",
+          "hash": "1177050235940242440"
+        },
+        {
+          "file": "apps/web/app/(auth)/login/page.tsx",
+          "hash": "1827118417330585115"
+        },
+        {
+          "file": "apps/web/app/(auth)/register/page.tsx",
+          "hash": "5565624243691752737"
+        },
+        {
+          "file": "apps/web/app/(public)/layout.tsx",
+          "hash": "12905509143604036410"
+        },
+        {
+          "file": "apps/web/app/(public)/page.tsx",
+          "hash": "15129388325410121693"
+        },
+        {
+          "file": "apps/web/app/(public)/trust/page.tsx",
+          "hash": "12669624079191978303"
+        },
+        {
+          "file": "apps/web/app/(shell)/builds/[id]/page.tsx",
+          "hash": "3672747450775684034"
+        },
+        {
+          "file": "apps/web/app/(shell)/builds/[id]/team/page.tsx",
+          "hash": "18162924551138268072"
+        },
+        {
+          "file": "apps/web/app/(shell)/builds/new/page.tsx",
+          "hash": "15160865820397851178"
+        },
+        {
+          "file": "apps/web/app/(shell)/builds/page.tsx",
+          "hash": "14154316674235799746"
+        },
+        {
+          "file": "apps/web/app/(shell)/feed/page.tsx",
+          "hash": "3620769896816993656"
+        },
+        {
+          "file": "apps/web/app/(shell)/layout.tsx",
+          "hash": "7833114566523846397"
+        },
+        {
+          "file": "apps/web/app/(shell)/post/new/page.tsx",
+          "hash": "2604995373729994789"
+        },
+        {
+          "file": "apps/web/app/(shell)/posts/[id]/page.tsx",
+          "hash": "15012300149021485388"
+        },
+        {
+          "file": "apps/web/app/(shell)/profile/[id]/page.tsx",
+          "hash": "2898049866995355531"
+        },
+        {
+          "file": "apps/web/app/(shell)/profile/export/page.tsx",
+          "hash": "10750984779430537013"
+        },
+        {
+          "file": "apps/web/app/(shell)/wallet/page.tsx",
+          "hash": "5667428714816480667"
+        },
+        {
+          "file": "apps/web/app/admin/builds/page.tsx",
+          "hash": "8796504326012385358"
+        },
+        {
+          "file": "apps/web/app/admin/campus/page.tsx",
+          "hash": "3885179716875745805"
+        },
+        {
+          "file": "apps/web/app/admin/layout.tsx",
+          "hash": "13329592939836459182"
+        },
+        {
+          "file": "apps/web/app/admin/page.tsx",
+          "hash": "15390811310094300829"
+        },
+        {
+          "file": "apps/web/app/admin/skills/page.tsx",
+          "hash": "12258521177883373115"
+        },
+        {
+          "file": "apps/web/app/api/auth/[...nextauth]/route.ts",
+          "hash": "12338969874242831508"
+        },
+        {
+          "file": "apps/web/app/api/events/route.ts",
+          "hash": "6835846961662234898"
+        },
+        {
+          "file": "apps/web/app/api/trpc/[trpc]/route.ts",
+          "hash": "154208650380742709"
+        },
+        {
+          "file": "apps/web/app/globals.css",
+          "hash": "8407433070259589983"
+        },
+        {
+          "file": "apps/web/app/layout.tsx",
+          "hash": "8968153057023890895"
+        },
+        {
+          "file": "apps/web/app/not-found.tsx",
+          "hash": "2211529296132838671"
+        },
+        {
+          "file": "apps/web/components/admin/AdminTabs.tsx",
+          "hash": "16342678077758460286"
+        },
+        {
+          "file": "apps/web/components/admin/BuildsConsole.tsx",
+          "hash": "3832259921228644537"
+        },
+        {
+          "file": "apps/web/components/admin/CampusConsole.tsx",
+          "hash": "5509424490967781303"
+        },
+        {
+          "file": "apps/web/components/admin/SkillsConsole.tsx",
+          "hash": "14908825103509308878"
+        },
+        {
+          "file": "apps/web/components/auth/LoginForm.tsx",
+          "hash": "7514169184897238765"
+        },
+        {
+          "file": "apps/web/components/auth/RegisterForm.tsx",
+          "hash": "12034105245431902649"
+        },
+        {
+          "file": "apps/web/components/builds/BuildArchive.tsx",
+          "hash": "15979390294344748076"
+        },
+        {
+          "file": "apps/web/components/builds/BuildDetail.tsx",
+          "hash": "12597275108277372795"
+        },
+        {
+          "file": "apps/web/components/builds/NewBuildForm.tsx",
+          "hash": "12435185098224180968"
+        },
+        {
+          "file": "apps/web/components/builds/TeamManager.tsx",
+          "hash": "16917163605596766488"
+        },
+        {
+          "file": "apps/web/components/compose/ComposeForm.tsx",
+          "hash": "2601234559558496635"
+        },
+        {
+          "file": "apps/web/components/feed/FeedView.tsx",
+          "hash": "17829993615085390639"
+        },
+        {
+          "file": "apps/web/components/feed/ScarcityRail.tsx",
+          "hash": "17228584701340661611"
+        },
+        {
+          "file": "apps/web/components/post/PostDetail.tsx",
+          "hash": "9228598228748849899"
+        },
+        {
+          "file": "apps/web/components/profile/BuzzScoreCard.tsx",
+          "hash": "16322182205926255951"
+        },
+        {
+          "file": "apps/web/components/profile/PrintButton.tsx",
+          "hash": "14196245643398741666"
+        },
+        {
+          "file": "apps/web/components/public/LightMode.tsx",
+          "hash": "4901144163379886681"
+        },
+        {
+          "file": "apps/web/components/shell/NotificationPanel.tsx",
+          "hash": "12636256462298009974"
+        },
+        {
+          "file": "apps/web/components/shell/ShellNav.tsx",
+          "hash": "7805145666368038678"
+        },
+        {
+          "file": "apps/web/components/trust/TrustDashboard.tsx",
+          "hash": "14761161789515932598"
+        },
+        {
+          "file": "apps/web/components/wallet/WalletView.tsx",
+          "hash": "15601871867992108462"
+        },
+        {
+          "file": "apps/web/lib/trpc/client.tsx",
+          "hash": "12926257657653173831"
+        },
+        {
+          "file": "apps/web/lib/trpc/server.ts",
+          "hash": "7834216156177670383"
+        },
+        {
+          "file": "apps/web/lib/useActivityStream.ts",
+          "hash": "956323159485199519"
+        },
+        {
+          "file": "apps/web/next-env.d.ts",
+          "hash": "2079576359933084494"
+        },
+        {
+          "file": "apps/web/next.config.mjs",
+          "hash": "4368154876920540315"
+        },
+        {
+          "file": "apps/web/package.json",
+          "hash": "14328117156095275509",
+          "deps": [
+            "npm:@types/bcryptjs",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:autoprefixer",
+            "npm:eslint",
+            "npm:eslint-config-next",
+            "npm:postcss",
+            "npm:tailwindcss",
+            "npm:typescript",
+            "@buzz/core",
+            "@buzz/db",
+            "@buzz/ui",
+            "npm:@tanstack/react-query",
+            "npm:@trpc/client",
+            "npm:@trpc/react-query",
+            "npm:@trpc/server",
+            "npm:bcryptjs",
+            "npm:clsx",
+            "npm:date-fns",
+            "npm:dotenv",
+            "npm:drizzle-orm",
+            "npm:framer-motion",
+            "npm:lucide-react",
+            "npm:next",
+            "npm:next-auth",
+            "npm:postgres",
+            "npm:react",
+            "npm:react-dom",
+            "npm:recharts",
+            "npm:server-only",
+            "npm:superjson",
+            "npm:tailwind-merge",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "apps/web/postcss.config.mjs",
+          "hash": "1886002347757770194"
+        },
+        {
+          "file": "apps/web/server/auth.ts",
+          "hash": "14523801283700061836"
+        },
+        {
+          "file": "apps/web/server/routers/_app.ts",
+          "hash": "10370398422774309049"
+        },
+        {
+          "file": "apps/web/server/routers/account.ts",
+          "hash": "2168577655037203644"
+        },
+        {
+          "file": "apps/web/server/routers/admin.ts",
+          "hash": "9381861033817038859"
+        },
+        {
+          "file": "apps/web/server/routers/build.ts",
+          "hash": "17434526688165757815"
+        },
+        {
+          "file": "apps/web/server/routers/post.ts",
+          "hash": "14678873513024914925"
+        },
+        {
+          "file": "apps/web/server/routers/profile.ts",
+          "hash": "16653471148244644606"
+        },
+        {
+          "file": "apps/web/server/routers/trust.ts",
+          "hash": "12504863811053071843"
+        },
+        {
+          "file": "apps/web/server/routers/wallet.ts",
+          "hash": "16909705517434531520"
+        },
+        {
+          "file": "apps/web/server/trpc.ts",
+          "hash": "3647050576155481308"
+        },
+        {
+          "file": "apps/web/tailwind.config.ts",
+          "hash": "17701172841440661547"
+        },
+        {
+          "file": "apps/web/tsconfig.json",
+          "hash": "9191590663904117871"
         }
       ],
       "@buzz/db": [
@@ -36,8 +435,27 @@
           "hash": "17233532386531418433"
         },
         {
+          "file": "packages/db/migrations/0000_massive_yellowjacket.sql",
+          "hash": "14830358906505998310"
+        },
+        {
+          "file": "packages/db/migrations/meta/0000_snapshot.json",
+          "hash": "1168808133665491723"
+        },
+        {
+          "file": "packages/db/migrations/meta/_journal.json",
+          "hash": "399535653179643932"
+        },
+        {
           "file": "packages/db/package.json",
-          "hash": "12461281336270328055"
+          "hash": "9136547978736842996",
+          "deps": [
+            "npm:dotenv",
+            "npm:drizzle-kit",
+            "npm:tsx",
+            "npm:drizzle-orm",
+            "npm:postgres"
+          ]
         },
         {
           "file": "packages/db/src/client.ts",
@@ -56,108 +474,106 @@
           "hash": "1955472809513267287"
         }
       ],
-      "@buzz/core": [
+      "@buzz/ui": [
         {
-          "file": "packages/core/package.json",
-          "hash": "14042115467830760346",
-          "deps": [
-            "@buzz/db"
-          ]
+          "file": "packages/ui/package.json",
+          "hash": "322080224694591143"
         },
         {
-          "file": "packages/core/src/__tests__/integration.test.ts",
-          "hash": "4254044220380967509"
+          "file": "packages/ui/src/composites/ActivityPulse.tsx",
+          "hash": "14719441712398829281"
         },
         {
-          "file": "packages/core/src/__tests__/ledger.test.ts",
-          "hash": "17504728875221228589"
+          "file": "packages/ui/src/composites/BuildCard.tsx",
+          "hash": "10034518278928612417"
         },
         {
-          "file": "packages/core/src/__tests__/lifecycle.test.ts",
-          "hash": "17511053850593274850"
+          "file": "packages/ui/src/composites/FeedFilterChips.tsx",
+          "hash": "15354070721272365591"
         },
         {
-          "file": "packages/core/src/__tests__/rules.test.ts",
-          "hash": "9385467097686707374"
+          "file": "packages/ui/src/composites/Honeycomb.tsx",
+          "hash": "15067327665819235650"
         },
         {
-          "file": "packages/core/src/constants.ts",
-          "hash": "17746724048133409219"
+          "file": "packages/ui/src/composites/LedgerRow.tsx",
+          "hash": "86696780356736712"
         },
         {
-          "file": "packages/core/src/digest.ts",
-          "hash": "9206442829886439666"
+          "file": "packages/ui/src/composites/LifecycleTimeline.tsx",
+          "hash": "1538503145513053578"
         },
         {
-          "file": "packages/core/src/errors.ts",
-          "hash": "3272213300981019987"
+          "file": "packages/ui/src/composites/PostCard.tsx",
+          "hash": "9060508818982708646"
         },
         {
-          "file": "packages/core/src/index.ts",
-          "hash": "3712341798814232719"
+          "file": "packages/ui/src/index.ts",
+          "hash": "9224941023275384574"
         },
         {
-          "file": "packages/core/src/ledger.ts",
-          "hash": "16996473435963642235"
+          "file": "packages/ui/src/primitives/Badge.tsx",
+          "hash": "7460231886057400260"
         },
         {
-          "file": "packages/core/src/lifecycle.ts",
-          "hash": "5913820477359176975"
+          "file": "packages/ui/src/primitives/Button.tsx",
+          "hash": "9757564801056504924"
         },
         {
-          "file": "packages/core/src/money.ts",
-          "hash": "5842269977863875116"
+          "file": "packages/ui/src/primitives/Dialog.tsx",
+          "hash": "12520944059504328818"
         },
         {
-          "file": "packages/core/src/policy.ts",
-          "hash": "4034669740127058617"
+          "file": "packages/ui/src/primitives/DropdownMenu.tsx",
+          "hash": "9814054259138670329"
         },
         {
-          "file": "packages/core/src/ranking.ts",
-          "hash": "2301482688101764779"
+          "file": "packages/ui/src/primitives/Input.tsx",
+          "hash": "14252917713329719336"
         },
         {
-          "file": "packages/core/src/scarcity.ts",
-          "hash": "5396505576675006441"
+          "file": "packages/ui/src/primitives/Misc.tsx",
+          "hash": "17324679586376751757"
         },
         {
-          "file": "packages/core/src/score.ts",
-          "hash": "10967478180535689298"
+          "file": "packages/ui/src/primitives/Select.tsx",
+          "hash": "4059613083268265177"
         },
         {
-          "file": "packages/core/src/sla.ts",
-          "hash": "8780373334141141848"
+          "file": "packages/ui/src/primitives/Tabs.tsx",
+          "hash": "16320011677829472633"
         },
         {
-          "file": "packages/core/src/validation/auth.ts",
-          "hash": "8702851910279125530"
+          "file": "packages/ui/src/primitives/Toast.tsx",
+          "hash": "17155379823692610392"
         },
         {
-          "file": "packages/core/src/validation/build.ts",
-          "hash": "9409438486458659387"
+          "file": "packages/ui/src/primitives/Tooltip.tsx",
+          "hash": "3141352308167052863"
         },
         {
-          "file": "packages/core/src/validation/index.ts",
-          "hash": "15440673825188780319"
+          "file": "packages/ui/src/utils/category.ts",
+          "hash": "14613002008504001547"
         },
         {
-          "file": "packages/core/src/validation/post.ts",
-          "hash": "5579195400432414634"
-        }
-      ],
-      "@buzz/web": [
+          "file": "packages/ui/src/utils/cn.ts",
+          "hash": "302961142249979891"
+        },
         {
-          "file": "apps/web/package.json",
-          "hash": "14455300408681755641",
-          "deps": [
-            "@buzz/core",
-            "@buzz/db",
-            "@buzz/ui"
-          ]
+          "file": "packages/ui/src/utils/time.ts",
+          "hash": "5433043708839486066"
         }
       ]
     },
     "nonProjectFiles": [
+      {
+        "file": ".env.example",
+        "hash": "7225670954906595393"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "11627161708463498695"
+      },
       {
         "file": "Buzz_Complete_PRD.md",
         "hash": "10220418756604540923"
@@ -171,12 +587,20 @@
         "hash": "7479891523772999025"
       },
       {
+        "file": "README.md",
+        "hash": "10852843454405725937"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "2249984800845579397"
+      },
+      {
         "file": "docs/ARCHITECTURE.md",
         "hash": "14403268010336438767"
       },
       {
         "file": "docs/BUILD_PLAN.md",
-        "hash": "16070165764627963390"
+        "hash": "9938770794201837375"
       },
       {
         "file": "docs/DESIGN_SYSTEM.md",
@@ -195,12 +619,20 @@
         "hash": "14670132124483104828"
       },
       {
+        "file": "package-lock.json",
+        "hash": "1558862452441873922"
+      },
+      {
         "file": "package.json",
-        "hash": "13925306886154058701"
+        "hash": "11167407003127101259"
       },
       {
         "file": "schema.ts",
         "hash": "11727469964143703918"
+      },
+      {
+        "file": "scripts/seed.mts",
+        "hash": "9835303859782379544"
       },
       {
         "file": "tailwind.config.ts",
@@ -208,11 +640,11 @@
       },
       {
         "file": "tsconfig.base.json",
-        "hash": "12186652005718117470"
+        "hash": "831572030228779925"
       },
       {
         "file": "vitest.config.ts",
-        "hash": "16192073503305922962"
+        "hash": "7812567901636579527"
       }
     ]
   }

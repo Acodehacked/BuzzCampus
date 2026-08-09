@@ -14,22 +14,30 @@ import { cn } from "../utils/cn";
  * category colours appear together (§4).
  */
 
+// A pointy-top hexagon, 46 wide × 52 tall.
 const HEX_PATH = "M 26 0 L 49 13 L 49 39 L 26 52 L 3 39 L 3 13 Z";
 
+// Pointy-top hexes tessellate at (±46, 0) and (±23, ±39) — anything else
+// leaves them overlapping instead of interlocking, which rather undermines
+// "three cells forming one honeycomb". One on top, two below.
 const CELLS = [
   {
     key: "campus" as const,
     // final position in the cluster
-    x: 0,
+    x: 23,
     y: 0,
     // where it flies in from
-    fromX: -42,
-    fromY: -30,
+    fromX: 23,
+    fromY: -44,
     delay: 0,
   },
-  { key: "skills" as const, x: 46, y: 26, fromX: 44, fromY: 62, delay: 0.09 },
-  { key: "builds" as const, x: 0, y: 52, fromX: -40, fromY: 92, delay: 0.18 },
+  { key: "skills" as const, x: 46, y: 39, fromX: 96, fromY: 62, delay: 0.09 },
+  { key: "builds" as const, x: 0, y: 39, fromX: -50, fromY: 62, delay: 0.18 },
 ];
+
+// Cluster spans x 0…95, y 0…91, plus a little breathing room for strokes.
+const VIEW_BOX = "-6 -6 107 103";
+const ASPECT = 103 / 107;
 
 export function Honeycomb({
   className,
@@ -42,9 +50,9 @@ export function Honeycomb({
 
   return (
     <svg
-      viewBox="-6 -6 108 118"
+      viewBox={VIEW_BOX}
       width={size}
-      height={(size * 118) / 108}
+      height={size * ASPECT}
       className={cn("overflow-visible", className)}
       role="img"
       aria-label="Three hexagonal cells — Campus, Skills and Builds — forming one honeycomb"

@@ -4,7 +4,7 @@ import { cn } from "../utils/cn";
 import { categoryTokens } from "../utils/category";
 import { TooltipContent, TooltipTrigger } from "../primitives/Tooltip";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { relativeTime } from "./PostCard";
+import { relativeTime } from "../utils/time";
 
 /**
  * The live-activity pulse — docs/DESIGN_SYSTEM.md §5, signature moment 2.

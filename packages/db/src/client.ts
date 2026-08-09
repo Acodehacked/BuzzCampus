@@ -18,6 +18,60 @@ const globalForDb = globalThis as unknown as {
   __buzzDb?: ReturnType<typeof drizzle<typeof schema>>;
 };
 
+/**
+ * Whether to speak TLS to this database.
+ *
+ * Getting this wrong breaks a deployment in a way that's hard to read from
+ * the error, so the rule is explicit rather than clever:
+ *
+ *   1. `?sslmode=` in the URL wins. Neon appends `sslmode=require`; a
+ *      self-hosted Postgres with no certificate wants `sslmode=disable`.
+ *   2. `DATABASE_SSL=require|disable` overrides, for when you don't control
+ *      the connection string.
+ *   3. Otherwise infer from the host. A hostname with no dot is a container
+ *      or service name on a private network — Docker Compose, Coolify,
+ *      Railway, Fly internal — and those don't serve TLS. A public
+ *      hostname does.
+ *
+ * The old rule ("anything that isn't localhost gets TLS") failed exactly
+ * case 3: a Coolify-managed Postgres reachable at `postgresql-xyz:5432`
+ * isn't localhost, but it has no certificate either.
+ */
+export function resolveSsl(
+  connectionString: string,
+): "require" | false {
+  const override = process.env.DATABASE_SSL?.trim().toLowerCase();
+  if (override === "disable" || override === "false") return false;
+  if (override === "require" || override === "true") return "require";
+
+  let host = "";
+  let sslmode = "";
+  try {
+    const url = new URL(connectionString);
+    host = url.hostname;
+    sslmode = url.searchParams.get("sslmode")?.toLowerCase() ?? "";
+  } catch {
+    // An unparseable URL will fail at connect time with a better message
+    // than anything thrown here; fall through to the safe default.
+    return "require";
+  }
+
+  if (sslmode === "disable" || sslmode === "allow") return false;
+  if (sslmode) return "require";
+
+  const isLoopback =
+    host === "localhost" || host === "127.0.0.1" || host === "::1";
+  // No dot → a private service name (`db`, `postgresql-abc123`).
+  const isPrivateServiceName = !host.includes(".");
+  const isInternalTld =
+    host.endsWith(".internal") ||
+    host.endsWith(".local") ||
+    host.endsWith(".railway.internal") ||
+    host.endsWith(".flycast");
+
+  return isLoopback || isPrivateServiceName || isInternalTld ? false : "require";
+}
+
 function connect(): postgres.Sql {
   if (globalForDb.__buzzSql) return globalForDb.__buzzSql;
 
@@ -28,15 +82,10 @@ function connect(): postgres.Sql {
     );
   }
 
-  const isLocal =
-    connectionString.includes("localhost") ||
-    connectionString.includes("127.0.0.1");
-
   const client = postgres(connectionString, {
     max: process.env.NODE_ENV === "production" ? 10 : 3,
     idle_timeout: 20,
-    // Neon and most managed Postgres require TLS; local usually doesn't.
-    ssl: isLocal ? false : "require",
+    ssl: resolveSsl(connectionString),
   });
 
   globalForDb.__buzzSql = client;

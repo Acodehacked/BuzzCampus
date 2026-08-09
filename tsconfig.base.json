@@ -4,6 +4,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "types": ["node"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,7 +14,8 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "isolatedModules": true,
-    "baseUrl": ".",
+    // No `baseUrl` — it's deprecated as of TS 6, and `paths` resolve
+    // relative to the tsconfig that declares them without it.
     "paths": {
       "@buzz/db": ["packages/db/src/index.ts"],
       "@buzz/db/*": ["packages/db/src/*"],

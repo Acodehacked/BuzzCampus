@@ -1,0 +1,63 @@
+# Local Postgres for Buzz.
+#
+#   docker compose up -d          start it
+#   docker compose logs -f db     watch it
+#   docker compose down           stop it (data survives)
+#   docker compose down -v        stop it and wipe the data
+#
+# Production targets Neon (docs/PRD.md §9) — the app connects over plain
+# TCP with postgres-js either way, so nothing but DATABASE_URL changes
+# between this and a managed instance.
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: buzz-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: buzz
+      POSTGRES_PASSWORD: buzz
+      POSTGRES_DB: buzz
+      # Deterministic collation, so ORDER BY on text behaves the same here
+      # as it does on Neon.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - buzz-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # The app's realtime path uses LISTEN/NOTIFY, so it matters that the
+      # server is genuinely accepting connections, not just booted.
+      test: ["CMD-SHELL", "pg_isready -U buzz -d buzz"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # A throwaway database for the transactional tests in packages/core.
+  # They write real rows, so they get their own instance rather than
+  # sharing the development one.
+  db-test:
+    image: postgres:17-alpine
+    container_name: buzz-postgres-test
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: buzz
+      POSTGRES_PASSWORD: buzz
+      POSTGRES_DB: buzz_test
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5433:5432"
+    # No volume — a test database that forgets everything on restart is a
+    # feature.
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U buzz -d buzz_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  buzz-pgdata:

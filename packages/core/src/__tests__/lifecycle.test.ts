@@ -90,24 +90,65 @@ describe("the status graph", () => {
 });
 
 describe("authorisation", () => {
-  it("stops you accepting your own Ask", () => {
+  // The author accepting an offer is the main flow of the whole platform,
+  // so what's barred is self-dealing — being the counterparty on your own
+  // post — not being the person who clicks accept.
+  it("lets the author accept someone else's offer", () => {
     expect(() =>
-      assertActorMayTransition(post(), student("student-1"), "accepted"),
-    ).toThrow(BuzzError);
-  });
-
-  it("lets someone else accept an Ask", () => {
-    expect(() =>
-      assertActorMayTransition(post(), student("student-2"), "accepted"),
+      assertActorMayTransition(
+        post(),
+        student("student-1"),
+        "accepted",
+        undefined,
+        "student-2",
+      ),
     ).not.toThrow();
   });
 
-  it("lets the author accept their own Give — that is the whole point", () => {
+  it("stops you being the counterparty on your own post", () => {
+    expect(() =>
+      assertActorMayTransition(
+        post(),
+        student("student-1"),
+        "accepted",
+        undefined,
+        "student-1",
+      ),
+    ).toThrow(/fulfils your own post/);
+  });
+
+  it("stops self-dealing on a Give as well as an Ask", () => {
     expect(() =>
       assertActorMayTransition(
         post({ type: "give" }),
         student("student-1"),
         "accepted",
+        undefined,
+        "student-1",
+      ),
+    ).toThrow(BuzzError);
+  });
+
+  it("lets someone else accept an Ask", () => {
+    expect(() =>
+      assertActorMayTransition(
+        post(),
+        student("student-2"),
+        "accepted",
+        undefined,
+        "student-2",
+      ),
+    ).not.toThrow();
+  });
+
+  it("lets a Give be taken up by a learner", () => {
+    expect(() =>
+      assertActorMayTransition(
+        post({ type: "give" }),
+        student("student-1"),
+        "accepted",
+        undefined,
+        "student-9",
       ),
     ).not.toThrow();
   });
