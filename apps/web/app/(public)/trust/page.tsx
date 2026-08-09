@@ -8,8 +8,10 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default function TrustPage() {
+  // pt-28 clears the fixed floating nav — the landing page gets away
+  // without it because its hero panel carries its own top padding.
   return (
-    <div className="shell-column py-14">
+    <div className="shell-column pb-14 pt-28">
       <header className="mb-10 max-w-2xl">
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-muted">
           Public · no account needed

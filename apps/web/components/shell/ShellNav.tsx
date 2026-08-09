@@ -117,7 +117,13 @@ export function ShellNav({
 
           {/* The global "+ Post" stays neutral — it isn't category-specific
               (docs/DESIGN_SYSTEM.md §4). */}
-          <Button asChild variant="primary" size="sm" className="ml-1">
+          <Button
+            asChild
+            variant="primary"
+            size="sm"
+            className="ml-1"
+            data-tour="post-button"
+          >
             <Link href="/post/new">
               <Plus className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Post</span>

@@ -5,8 +5,18 @@ import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { cn } from "../utils/cn";
 import { categoryTokens, type CategoryKey } from "../utils/category";
 
-type Variant = "primary" | "secondary" | "ghost" | "quiet" | "danger";
-type Size = "sm" | "md" | "lg" | "icon";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "quiet"
+  | "danger"
+  /** the loud one: solid ink pill with a hard offset — entry surfaces */
+  | "pop"
+  /** inverse of pop, for sitting on a dark panel */
+  | "pop-light";
+
+type Size = "sm" | "md" | "lg" | "xl" | "icon";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
@@ -21,12 +31,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-// Flat, 1px-bordered, 6px radius. No shadow-sm, no bg-card, no rounded-md
-// default — the shadcn silhouette is banned outright (CLAUDE.md Rule 1).
 // Dark mode is the app shell; light mode is the public pages. Every
 // variant needs BOTH treatments — a primary button that only sets its
 // light-mode background inherits the dark-mode text colour and ends up
-// black on black (docs/DESIGN_SYSTEM.md §6).
+// black on black.
 const VARIANTS: Record<Variant, string> = {
   primary:
     "border border-transparent bg-text-primary-dark text-graphite-950 hover:bg-white " +
@@ -47,13 +55,35 @@ const VARIANTS: Record<Variant, string> = {
   danger:
     "bg-transparent text-danger-500 border border-danger-500/40 hover:bg-danger-500/10 " +
     "focus-visible:ring-danger-500",
+
+  // The reference's signature control: a solid pill that sits on a
+  // saturated panel, with a hard black offset instead of a soft blur, and
+  // a press that actually moves it into the shadow.
+  pop:
+    "rounded-full border-2 border-ink bg-ink text-white shadow-pop " +
+    "hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[5px_5px_0_0_rgb(11_13_16)] " +
+    "active:translate-x-[4px] active:translate-y-[4px] active:shadow-none " +
+    "focus-visible:ring-ink",
+  "pop-light":
+    "rounded-full border-2 border-white bg-white text-ink shadow-pop-light " +
+    "hover:-translate-x-[1px] hover:-translate-y-[1px] " +
+    "active:translate-x-[4px] active:translate-y-[4px] active:shadow-none " +
+    "focus-visible:ring-white",
 };
 
 const SIZES: Record<Size, string> = {
   sm: "h-8 px-3 text-xs gap-1.5",
   md: "h-9 px-4 text-sm gap-2",
   lg: "h-11 px-6 text-sm gap-2",
+  xl: "h-14 px-8 text-base gap-2.5 font-semibold",
   icon: "h-9 w-9 justify-center",
+};
+
+const POP_SIZES: Partial<Record<Size, string>> = {
+  sm: "h-9 px-4 text-xs gap-1.5 font-semibold",
+  md: "h-11 px-6 text-sm gap-2 font-semibold",
+  lg: "h-13 px-8 text-base gap-2 font-semibold",
+  xl: "h-16 px-10 text-lg gap-3 font-bold",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -72,6 +102,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const Comp = asChild ? Slot : "button";
+    const isPop = variant === "pop" || variant === "pop-light";
     const categoryStyle =
       category && variant === "primary" ? categoryTokens(category).button : null;
 
@@ -86,7 +117,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <span
             aria-hidden
-            className="h-3 w-3 shrink-0 animate-spin rounded-full border border-current border-t-transparent"
+            className="h-3 w-3 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent"
           />
         ) : null}
         {children}
@@ -98,13 +129,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...(asChild ? {} : { disabled: disabled || loading })}
         className={cn(
-          "inline-flex items-center rounded-sm font-medium tracking-tight",
-          "transition-[background-color,border-color,color] duration-150",
-          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-0",
+          "inline-flex items-center font-medium tracking-tight",
+          "transition-all duration-150 ease-spring will-change-transform",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+          "focus-visible:ring-offset-transparent",
           "disabled:pointer-events-none disabled:opacity-40",
           "whitespace-nowrap select-none",
-          SIZES[size],
+          isPop ? "rounded-full" : "rounded-sm",
+          (isPop ? (POP_SIZES[size] ?? SIZES[size]) : SIZES[size]),
           categoryStyle ?? VARIANTS[variant],
+          // Non-pop buttons still get a small press, so every control on
+          // the platform feels like the same physical object.
+          !isPop && "active:scale-[0.97]",
           loading && "cursor-progress",
           className,
         )}

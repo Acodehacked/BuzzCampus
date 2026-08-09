@@ -26,7 +26,7 @@ export function ScarcityRail() {
   const max = Math.max(...rows.map((r) => r.multiplier), 1.5);
 
   return (
-    <Surface className="p-4">
+    <Surface data-tour="scarcity-rail" className="p-4">
       <div className="mb-3 flex items-baseline justify-between gap-2">
         <h2 className="font-display text-sm tracking-tight text-text-primary-dark">
           Scarcity Index

@@ -110,14 +110,133 @@ html.light {
 }
 
 @layer utilities {
-  /* A single-hue, low-contrast tint of ONE category colour. Section 3
-     permits this exactly once on the whole site — the landing hero. */
-  .hero-tint {
-    background-image: radial-gradient(
-      120% 80% at 15% 0%,
-      rgba(240, 101, 60, 0.07) 0%,
-      rgba(240, 101, 60, 0) 62%
-    );
+  /* ── the loud register ────────────────────────────────────────────
+     Entry surfaces only: landing, onboarding, auth, the tour, empty
+     states. Working surfaces keep the graphite ground. */
+
+  /* Flat saturated panel with near-black type. No gradient — the whole
+     point is that the colour is confident enough to stand alone. */
+  .pop-panel {
+    color: theme("colors.ink");
+  }
+
+  .pop-panel h1,
+  .pop-panel h2,
+  .pop-panel h3 {
+    @apply font-display font-bold tracking-[-0.03em];
+  }
+
+  /* Headline set the way the reference does it: heavy, tight, and
+     allowed to be genuinely large. */
+  .display-xl {
+    @apply font-display font-bold tracking-[-0.035em] leading-[0.95];
+  }
+
+  /* A card that sits at a slight angle, like a dropped photo. Used for
+     the stacked post previews. */
+  .tilt {
+    transform: rotate(var(--tilt, -2deg));
+  }
+
+  /* Hard offset instead of a blur — an object on a surface, not a
+     floating pane. */
+  .edge {
+    box-shadow: theme("boxShadow.pop");
+  }
+
+  /* A very quiet grain, to stop large flat colour fields from looking
+     like flat CSS. Cheap: one inline SVG, no image request. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* ── entrance animation ──────────────────────────────────────────
+     Deliberately CSS, not GSAP.
+
+     A JS `from()` tween sets opacity:0 the instant it's created, so if the
+     timeline is interrupted — a throttled rAF in a background tab, a
+     hydration hiccup, an error in an unrelated tween — the element stays
+     invisible forever. That is an acceptable risk for a decorative
+     flourish and an unacceptable one for a landing page's primary button.
+
+     CSS animations can't strand content: `prefers-reduced-motion` in this
+     file forces them to complete instantly, and if animation is
+     unsupported the element simply renders in its natural state. GSAP
+     keeps the jobs CSS genuinely can't do — the scroll-scrubbed
+     timelines. */
+  .rise {
+    animation: rise-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .rise-word {
+    display: inline-block;
+    animation: rise-word 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .pop-in {
+    animation: pop-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rise-word {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.4) rotate(-25deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  /* ── converge section fallback ───────────────────────────────────
+     Without JS the section shows its FINAL state — one merged feed —
+     which is also the correct still image of the argument it makes.
+     GSAP flips data-anim to "on" and takes over from there. */
+  [data-anim="off"] .stack-column {
+    display: none;
+  }
+
+  [data-anim="off"] .merged-feed {
+    position: static !important;
+    opacity: 1 !important;
+  }
+
+  /* The scrolling ticker on the landing page. Duplicated content inside,
+     so translating -50% loops seamlessly. */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 
   .text-balance {

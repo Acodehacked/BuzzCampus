@@ -109,3 +109,68 @@ Everything else on the platform should be quiet, confident, and typographically 
 ## 6. Dark Mode Is Primary
 
 Design and build dark mode first (`graphite-*` tokens) — it's the default for the app shell (feed, posts, wallet, admin). Light mode (`paper-*` tokens) is used for the public-facing pages only: landing, the Trust dashboard, and the Builds public archive — these are the pages a prospective student, parent, or judge might view without logging in, and a warmer, brighter register suits that audience better.
+
+---
+
+## 7. The Two Registers (added — supersedes parts of §1–§5)
+
+The original direction above was Linear/Raycast restraint throughout. That
+still governs the **working surfaces**, but the product now runs two
+registers, and the difference is deliberate.
+
+### 7.1 ENTRY surfaces — loud
+
+Landing, onboarding (`/welcome`), auth, the dashboard tour, and empty
+states.
+
+- Full-bleed saturated panels from the `pop-*` palette: lime `#C6F832`,
+  pink `#FF4D8D`, yellow `#FFE24D`, violet `#8B5CF6`, sky `#5CC8F5`.
+- Near-black `ink` `#0B0D10` for type — never pure `#000`, which vibrates
+  on saturated colour.
+- Display type large, heavy and tight: `.display-xl`, weight 700,
+  `-0.035em` tracking.
+- Chunky pill controls (`Button variant="pop"`) with a **hard offset
+  shadow** rather than a soft blur, and a press that moves the button into
+  its own shadow. Physical, not floaty.
+- 2px borders, `rounded-2xl`+ on cards, slight tilts on stacked cards.
+- Scroll-linked motion via GSAP is allowed and encouraged here.
+
+### 7.2 WORKING surfaces — calm
+
+Feed, post detail, wallet, builds, admin, Trust.
+
+Unchanged in substance: graphite ground, 1px borders, dense left-aligned
+lists, colour used to MEAN something (which category, whether an SLA has
+breached) rather than to decorate. A full-bleed acid-green panel behind an
+SLA table is unreadable, and the feed is where people actually live.
+
+What these surfaces DID inherit: chunkier pill controls, a press state on
+every button, spring-animated selection (the feed filter chips share a
+layout element), and copy with a pulse.
+
+### 7.3 What this overrides in §3
+
+Still banned, and more relevant than ever now that the palette is loud:
+
+- Multi-hue gradients behind headlines, gradient text, glassmorphism as a
+  default, generic icon-in-a-circle feature grids, emoji as icons, and the
+  centred-hero cliché. The landing page is asymmetric, full-bleed and
+  scroll-driven precisely so it doesn't become one.
+
+No longer banned, on entry surfaces only:
+
+- Large radii (`rounded-2xl`/`3xl`) and full-bleed colour fields.
+- Motion on more than the four signature moments — but it must be
+  *scroll-linked or state-linked*, never idle decoration. The one
+  sanctioned idle animation is the auth aside's rocking cards.
+
+### 7.4 Motion split
+
+- **Framer Motion** — component state: onboarding panel transitions, the
+  tour's coach marks, the lifecycle timeline, chip selection.
+- **GSAP + ScrollTrigger** — long scroll-linked timelines on the landing
+  page, where several elements are choreographed against scroll position.
+
+Both are wrapped so `prefers-reduced-motion` renders the final state with
+no animation. The convergence section on the landing page degrades to its
+merged state, which is also the correct still image.

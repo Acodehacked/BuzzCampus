@@ -18,10 +18,11 @@ export function RegisterForm() {
 
   const register = trpc.account.register.useMutation({
     onSuccess: async () => {
-      // Straight into the app — a confirmation screen here is friction for
-      // no benefit.
+      // Straight into onboarding — a confirmation screen here is friction
+      // for no benefit, and the four welcome panels do more to explain the
+      // product than any amount of copy on this form could.
       await signIn("credentials", { email, password, redirect: false });
-      router.push("/feed");
+      router.push("/welcome");
       router.refresh();
     },
     onError: (error) => setErrors({ form: error.message }),
@@ -53,7 +54,7 @@ export function RegisterForm() {
 
   return (
     <>
-      <h1 className="text-2xl tracking-tight text-text-primary-dark">
+      <h1 className="display-xl text-3xl text-text-primary-dark">
         Join Buzz
       </h1>
       <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
@@ -125,7 +126,8 @@ export function RegisterForm() {
 
         <Button
           type="submit"
-          variant="primary"
+          variant="pop-light"
+          size="lg"
           className="w-full justify-center"
           loading={register.isPending}
         >

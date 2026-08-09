@@ -23,107 +23,113 @@
   },
   "nxJsonPlugins": [],
   "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "globals.css",
+        "hash": "12034264586271930419"
+      },
+      {
+        "file": "docs/DESIGN_SYSTEM.md",
+        "hash": "10531337959359986093"
+      },
+      {
+        "file": "CLAUDE.md",
+        "hash": "16134674678241035431"
+      },
+      {
+        "file": "HOWTOHOST.md",
+        "hash": "7192107132397258656"
+      },
+      {
+        "file": ".env.example",
+        "hash": "16219353608393898702"
+      },
+      {
+        "file": "Buzz_Complete_PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "11627161708463498695"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "7071996166724889697"
+      },
+      {
+        "file": "package.json",
+        "hash": "11167407003127101259"
+      },
+      {
+        "file": "docs/ARCHITECTURE.md",
+        "hash": "14403268010336438767"
+      },
+      {
+        "file": "nx.json",
+        "hash": "14670132124483104828"
+      },
+      {
+        "file": "docs/PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "3736080359999357676"
+      },
+      {
+        "file": "README.md",
+        "hash": "337064644856762371"
+      },
+      {
+        "file": "schema.ts",
+        "hash": "11727469964143703918"
+      },
+      {
+        "file": "scripts/seed.mts",
+        "hash": "9835303859782379544"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "5754650927598303120"
+      },
+      {
+        "file": "tailwind.config.ts",
+        "hash": "6696237629310940894"
+      },
+      {
+        "file": "docker-entrypoint.sh",
+        "hash": "10949061703129557134"
+      },
+      {
+        "file": "vitest.config.ts",
+        "hash": "7812567901636579527"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "2249984800845579397"
+      },
+      {
+        "file": "scripts/migrate.mjs",
+        "hash": "13465166708325858567"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "7451656278145667688"
+      },
+      {
+        "file": "docs/BUILD_PLAN.md",
+        "hash": "9938770794201837375"
+      },
+      {
+        "file": "DESIGN_SYSTEM.md",
+        "hash": "10531337959359986093"
+      }
+    ],
     "projectFileMap": {
-      "@buzz/core": [
-        {
-          "file": "packages/core/package.json",
-          "hash": "7571571104856244547",
-          "deps": [
-            "npm:vitest",
-            "@buzz/db",
-            "npm:drizzle-orm",
-            "npm:zod"
-          ]
-        },
-        {
-          "file": "packages/core/src/__tests__/integration.test.ts",
-          "hash": "5809599039628234963"
-        },
-        {
-          "file": "packages/core/src/__tests__/ledger.test.ts",
-          "hash": "17504728875221228589"
-        },
-        {
-          "file": "packages/core/src/__tests__/lifecycle.test.ts",
-          "hash": "18039856779655820188"
-        },
-        {
-          "file": "packages/core/src/__tests__/rules.test.ts",
-          "hash": "3502293803418326797"
-        },
-        {
-          "file": "packages/core/src/client.ts",
-          "hash": "620018627421338775"
-        },
-        {
-          "file": "packages/core/src/constants.ts",
-          "hash": "17746724048133409219"
-        },
-        {
-          "file": "packages/core/src/digest.ts",
-          "hash": "9206442829886439666"
-        },
-        {
-          "file": "packages/core/src/errors.ts",
-          "hash": "3272213300981019987"
-        },
-        {
-          "file": "packages/core/src/index.ts",
-          "hash": "9196428956227631044"
-        },
-        {
-          "file": "packages/core/src/ledger.ts",
-          "hash": "16996473435963642235"
-        },
-        {
-          "file": "packages/core/src/lifecycle.ts",
-          "hash": "13379012770398191645"
-        },
-        {
-          "file": "packages/core/src/money.ts",
-          "hash": "5842269977863875116"
-        },
-        {
-          "file": "packages/core/src/policy.ts",
-          "hash": "4034669740127058617"
-        },
-        {
-          "file": "packages/core/src/ranking.ts",
-          "hash": "9134450203432275011"
-        },
-        {
-          "file": "packages/core/src/scarcity.ts",
-          "hash": "2942135952784166900"
-        },
-        {
-          "file": "packages/core/src/score.ts",
-          "hash": "10967478180535689298"
-        },
-        {
-          "file": "packages/core/src/sla.ts",
-          "hash": "8780373334141141848"
-        },
-        {
-          "file": "packages/core/src/validation/auth.ts",
-          "hash": "6621658952517400943"
-        },
-        {
-          "file": "packages/core/src/validation/build.ts",
-          "hash": "9409438486458659387"
-        },
-        {
-          "file": "packages/core/src/validation/index.ts",
-          "hash": "15440673825188780319"
-        },
-        {
-          "file": "packages/core/src/validation/post.ts",
-          "hash": "3607826061855964356"
-        }
-      ],
       "@buzz/web": [
         {
           "file": "apps/web/app/(auth)/layout.tsx",
-          "hash": "1177050235940242440"
+          "hash": "16932517681686630554"
         },
         {
           "file": "apps/web/app/(auth)/login/page.tsx",
@@ -135,15 +141,15 @@
         },
         {
           "file": "apps/web/app/(public)/layout.tsx",
-          "hash": "12905509143604036410"
+          "hash": "12581151403897870387"
         },
         {
           "file": "apps/web/app/(public)/page.tsx",
-          "hash": "15129388325410121693"
+          "hash": "21216644882796136"
         },
         {
           "file": "apps/web/app/(public)/trust/page.tsx",
-          "hash": "12669624079191978303"
+          "hash": "14011771620186698809"
         },
         {
           "file": "apps/web/app/(shell)/builds/[id]/page.tsx",
@@ -163,7 +169,7 @@
         },
         {
           "file": "apps/web/app/(shell)/feed/page.tsx",
-          "hash": "3620769896816993656"
+          "hash": "6115964378835545706"
         },
         {
           "file": "apps/web/app/(shell)/layout.tsx",
@@ -179,7 +185,7 @@
         },
         {
           "file": "apps/web/app/(shell)/profile/[id]/page.tsx",
-          "hash": "2898049866995355531"
+          "hash": "5540957546109908219"
         },
         {
           "file": "apps/web/app/(shell)/profile/export/page.tsx",
@@ -218,12 +224,16 @@
           "hash": "6835846961662234898"
         },
         {
+          "file": "apps/web/app/api/health/route.ts",
+          "hash": "349839287667132132"
+        },
+        {
           "file": "apps/web/app/api/trpc/[trpc]/route.ts",
           "hash": "154208650380742709"
         },
         {
           "file": "apps/web/app/globals.css",
-          "hash": "8407433070259589983"
+          "hash": "16023064126721941485"
         },
         {
           "file": "apps/web/app/layout.tsx",
@@ -232,6 +242,10 @@
         {
           "file": "apps/web/app/not-found.tsx",
           "hash": "2211529296132838671"
+        },
+        {
+          "file": "apps/web/app/welcome/page.tsx",
+          "hash": "14705344532001611667"
         },
         {
           "file": "apps/web/components/admin/AdminTabs.tsx",
@@ -250,12 +264,16 @@
           "hash": "14908825103509308878"
         },
         {
+          "file": "apps/web/components/auth/AuthAside.tsx",
+          "hash": "9054967922354826078"
+        },
+        {
           "file": "apps/web/components/auth/LoginForm.tsx",
-          "hash": "7514169184897238765"
+          "hash": "2375851805553499716"
         },
         {
           "file": "apps/web/components/auth/RegisterForm.tsx",
-          "hash": "12034105245431902649"
+          "hash": "15776082524006871643"
         },
         {
           "file": "apps/web/components/builds/BuildArchive.tsx",
@@ -279,19 +297,39 @@
         },
         {
           "file": "apps/web/components/feed/FeedView.tsx",
-          "hash": "17829993615085390639"
+          "hash": "4136344379029489741"
         },
         {
           "file": "apps/web/components/feed/ScarcityRail.tsx",
-          "hash": "17228584701340661611"
+          "hash": "16894536691930912495"
+        },
+        {
+          "file": "apps/web/components/landing/ClosingPanel.tsx",
+          "hash": "7699229198097064850"
+        },
+        {
+          "file": "apps/web/components/landing/ConvergePanel.tsx",
+          "hash": "16384446794888643441"
+        },
+        {
+          "file": "apps/web/components/landing/HeroPanel.tsx",
+          "hash": "1849913396932537689"
+        },
+        {
+          "file": "apps/web/components/landing/HowItWorksPanel.tsx",
+          "hash": "12929844310256662694"
+        },
+        {
+          "file": "apps/web/components/landing/LiveFeedPanel.tsx",
+          "hash": "12130974936456326934"
+        },
+        {
+          "file": "apps/web/components/onboarding/OnboardingFlow.tsx",
+          "hash": "15007823334329393281"
         },
         {
           "file": "apps/web/components/post/PostDetail.tsx",
           "hash": "9228598228748849899"
-        },
-        {
-          "file": "apps/web/components/profile/BuzzScoreCard.tsx",
-          "hash": "16322182205926255951"
         },
         {
           "file": "apps/web/components/profile/PrintButton.tsx",
@@ -307,7 +345,11 @@
         },
         {
           "file": "apps/web/components/shell/ShellNav.tsx",
-          "hash": "7805145666368038678"
+          "hash": "8021911735902849915"
+        },
+        {
+          "file": "apps/web/components/tour/FeedTour.tsx",
+          "hash": "9524367662849697727"
         },
         {
           "file": "apps/web/components/trust/TrustDashboard.tsx",
@@ -316,6 +358,10 @@
         {
           "file": "apps/web/components/wallet/WalletView.tsx",
           "hash": "15601871867992108462"
+        },
+        {
+          "file": "apps/web/lib/gsap.ts",
+          "hash": "4858525082990209505"
         },
         {
           "file": "apps/web/lib/trpc/client.tsx",
@@ -335,11 +381,11 @@
         },
         {
           "file": "apps/web/next.config.mjs",
-          "hash": "4368154876920540315"
+          "hash": "10036608049118379780"
         },
         {
           "file": "apps/web/package.json",
-          "hash": "14328117156095275509",
+          "hash": "11270372051708273900",
           "deps": [
             "npm:@types/bcryptjs",
             "npm:@types/react",
@@ -363,6 +409,7 @@
             "npm:dotenv",
             "npm:drizzle-orm",
             "npm:framer-motion",
+            "npm:gsap",
             "npm:lucide-react",
             "npm:next",
             "npm:next-auth",
@@ -422,59 +469,130 @@
         },
         {
           "file": "apps/web/tailwind.config.ts",
-          "hash": "17701172841440661547"
+          "hash": "5553227999328499237"
         },
         {
           "file": "apps/web/tsconfig.json",
           "hash": "9191590663904117871"
         }
       ],
-      "@buzz/db": [
+      "@buzz/core": [
         {
-          "file": "packages/db/drizzle.config.ts",
-          "hash": "17233532386531418433"
-        },
-        {
-          "file": "packages/db/migrations/0000_massive_yellowjacket.sql",
-          "hash": "14830358906505998310"
-        },
-        {
-          "file": "packages/db/migrations/meta/0000_snapshot.json",
-          "hash": "1168808133665491723"
-        },
-        {
-          "file": "packages/db/migrations/meta/_journal.json",
-          "hash": "399535653179643932"
-        },
-        {
-          "file": "packages/db/package.json",
-          "hash": "9136547978736842996",
+          "file": "packages/core/package.json",
+          "hash": "7571571104856244547",
           "deps": [
-            "npm:dotenv",
-            "npm:drizzle-kit",
-            "npm:tsx",
+            "npm:vitest",
+            "@buzz/db",
             "npm:drizzle-orm",
-            "npm:postgres"
+            "npm:zod"
           ]
         },
         {
-          "file": "packages/db/src/client.ts",
-          "hash": "7249684994204041047"
+          "file": "packages/core/src/__tests__/integration.test.ts",
+          "hash": "5809599039628234963"
         },
         {
-          "file": "packages/db/src/index.ts",
-          "hash": "3526931129931031584"
+          "file": "packages/core/src/__tests__/ledger.test.ts",
+          "hash": "17504728875221228589"
         },
         {
-          "file": "packages/db/src/migrate.ts",
-          "hash": "16823076800325716683"
+          "file": "packages/core/src/__tests__/lifecycle.test.ts",
+          "hash": "18039856779655820188"
         },
         {
-          "file": "packages/db/src/schema.ts",
-          "hash": "1955472809513267287"
+          "file": "packages/core/src/__tests__/rules.test.ts",
+          "hash": "8224130670805084089"
+        },
+        {
+          "file": "packages/core/src/client.ts",
+          "hash": "620018627421338775"
+        },
+        {
+          "file": "packages/core/src/constants.ts",
+          "hash": "17746724048133409219"
+        },
+        {
+          "file": "packages/core/src/digest.ts",
+          "hash": "9206442829886439666"
+        },
+        {
+          "file": "packages/core/src/errors.ts",
+          "hash": "3272213300981019987"
+        },
+        {
+          "file": "packages/core/src/index.ts",
+          "hash": "9196428956227631044"
+        },
+        {
+          "file": "packages/core/src/ledger.ts",
+          "hash": "16996473435963642235"
+        },
+        {
+          "file": "packages/core/src/lifecycle.ts",
+          "hash": "13379012770398191645"
+        },
+        {
+          "file": "packages/core/src/money.ts",
+          "hash": "5842269977863875116"
+        },
+        {
+          "file": "packages/core/src/policy.ts",
+          "hash": "4034669740127058617"
+        },
+        {
+          "file": "packages/core/src/ranking.ts",
+          "hash": "9134450203432275011"
+        },
+        {
+          "file": "packages/core/src/scarcity.ts",
+          "hash": "2942135952784166900"
+        },
+        {
+          "file": "packages/core/src/score.ts",
+          "hash": "10967478180535689298"
+        },
+        {
+          "file": "packages/core/src/sla.ts",
+          "hash": "8780373334141141848"
+        },
+        {
+          "file": "packages/core/src/validation/auth.ts",
+          "hash": "2193110648839532617"
+        },
+        {
+          "file": "packages/core/src/validation/build.ts",
+          "hash": "9409438486458659387"
+        },
+        {
+          "file": "packages/core/src/validation/index.ts",
+          "hash": "15440673825188780319"
+        },
+        {
+          "file": "packages/core/src/validation/post.ts",
+          "hash": "3607826061855964356"
         }
       ],
       "@buzz/ui": [
+        {
+          "file": "packages/ui/image copy 2.png",
+          "hash": "7562169346893724683"
+        },
+        {
+          "file": "packages/ui/image copy 3.png",
+          "hash": "4580242572818027202"
+        },
+        {
+          "file": "packages/ui/image copy 4.png",
+          "hash": "15909481959545069272"
+        },
+        {
+          "file": "packages/ui/image copy.png",
+          "hash": "2455184115031137478"
+        },
+        {
+          "file": "packages/ui/image.png",
+          "hash": "4194858034797909235"
+        },
         {
           "file": "packages/ui/package.json",
           "hash": "322080224694591143"
@@ -489,7 +607,7 @@
         },
         {
           "file": "packages/ui/src/composites/FeedFilterChips.tsx",
-          "hash": "15354070721272365591"
+          "hash": "5263528901301693914"
         },
         {
           "file": "packages/ui/src/composites/Honeycomb.tsx",
@@ -517,7 +635,7 @@
         },
         {
           "file": "packages/ui/src/primitives/Button.tsx",
-          "hash": "9757564801056504924"
+          "hash": "9176893643012730299"
         },
         {
           "file": "packages/ui/src/primitives/Dialog.tsx",
@@ -563,89 +681,52 @@
           "file": "packages/ui/src/utils/time.ts",
           "hash": "5433043708839486066"
         }
+      ],
+      "@buzz/db": [
+        {
+          "file": "packages/db/drizzle.config.ts",
+          "hash": "17233532386531418433"
+        },
+        {
+          "file": "packages/db/migrations/0000_massive_yellowjacket.sql",
+          "hash": "14830358906505998310"
+        },
+        {
+          "file": "packages/db/migrations/meta/0000_snapshot.json",
+          "hash": "1168808133665491723"
+        },
+        {
+          "file": "packages/db/migrations/meta/_journal.json",
+          "hash": "399535653179643932"
+        },
+        {
+          "file": "packages/db/package.json",
+          "hash": "9136547978736842996",
+          "deps": [
+            "npm:dotenv",
+            "npm:drizzle-kit",
+            "npm:tsx",
+            "npm:drizzle-orm",
+            "npm:postgres"
+          ]
+        },
+        {
+          "file": "packages/db/src/client.ts",
+          "hash": "1318337317020313816"
+        },
+        {
+          "file": "packages/db/src/index.ts",
+          "hash": "3526931129931031584"
+        },
+        {
+          "file": "packages/db/src/migrate.ts",
+          "hash": "16823076800325716683"
+        },
+        {
+          "file": "packages/db/src/schema.ts",
+          "hash": "1955472809513267287"
+        }
       ]
-    },
-    "nonProjectFiles": [
-      {
-        "file": ".env.example",
-        "hash": "7225670954906595393"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "11627161708463498695"
-      },
-      {
-        "file": "Buzz_Complete_PRD.md",
-        "hash": "10220418756604540923"
-      },
-      {
-        "file": "CLAUDE.md",
-        "hash": "16134674678241035431"
-      },
-      {
-        "file": "DESIGN_SYSTEM.md",
-        "hash": "7479891523772999025"
-      },
-      {
-        "file": "README.md",
-        "hash": "10852843454405725937"
-      },
-      {
-        "file": "docker-compose.yml",
-        "hash": "2249984800845579397"
-      },
-      {
-        "file": "docs/ARCHITECTURE.md",
-        "hash": "14403268010336438767"
-      },
-      {
-        "file": "docs/BUILD_PLAN.md",
-        "hash": "9938770794201837375"
-      },
-      {
-        "file": "docs/DESIGN_SYSTEM.md",
-        "hash": "7479891523772999025"
-      },
-      {
-        "file": "docs/PRD.md",
-        "hash": "10220418756604540923"
-      },
-      {
-        "file": "globals.css",
-        "hash": "12034264586271930419"
-      },
-      {
-        "file": "nx.json",
-        "hash": "14670132124483104828"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "1558862452441873922"
-      },
-      {
-        "file": "package.json",
-        "hash": "11167407003127101259"
-      },
-      {
-        "file": "schema.ts",
-        "hash": "11727469964143703918"
-      },
-      {
-        "file": "scripts/seed.mts",
-        "hash": "9835303859782379544"
-      },
-      {
-        "file": "tailwind.config.ts",
-        "hash": "6696237629310940894"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "831572030228779925"
-      },
-      {
-        "file": "vitest.config.ts",
-        "hash": "7812567901636579527"
-      }
-    ]
+    }
   }
 }

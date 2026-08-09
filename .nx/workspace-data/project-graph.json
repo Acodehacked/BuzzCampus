@@ -5047,6 +5047,15 @@
         "hash": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg=="
       }
     },
+    "npm:gsap": {
+      "type": "npm",
+      "name": "npm:gsap",
+      "data": {
+        "version": "3.15.0",
+        "packageName": "gsap",
+        "hash": "sha512-dMW4CWBTUK1AEEDeZc1g4xpPGIrSf9fJF960qbTZmN/QwZIWY5wgliS6JWl9/25fpTGJrMRtSjGtOmPnfjZB+A=="
+      }
+    },
     "npm:has-bigints": {
       "type": "npm",
       "name": "npm:has-bigints",
@@ -7593,6 +7602,11 @@
       {
         "source": "@buzz/web",
         "target": "npm:framer-motion",
+        "type": "static"
+      },
+      {
+        "source": "@buzz/web",
+        "target": "npm:gsap",
         "type": "static"
       },
       {
@@ -16898,5 +16912,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1786254095985
+  "computedAt": 1786268794837
 }

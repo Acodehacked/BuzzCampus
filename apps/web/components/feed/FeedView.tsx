@@ -165,11 +165,13 @@ export function FeedView({
       {/* Controls: one filter row, one sort, one search. Not a toolbar. */}
       <div className="sticky top-14 z-20 -mx-4 mb-1 border-b border-graphite-700 bg-graphite-950/95 px-4 py-3 sm:-mx-6 sm:px-6">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <div data-tour="feed-filters">
           <FeedFilterChips
             value={category}
             onChange={onCategoryChange}
             counts={counts}
           />
+          </div>
 
           <div className="ml-auto flex items-center gap-2">
             <div className="relative">
@@ -193,7 +195,10 @@ export function FeedView({
               ) : null}
             </div>
 
-            <div className="flex items-center rounded-sm border border-graphite-700">
+            <div
+              data-tour="feed-sort"
+              className="flex items-center rounded-sm border border-graphite-700"
+            >
               {SORTS.map((option) => (
                 <button
                   key={option.value}
@@ -274,7 +279,7 @@ export function FeedView({
           }
         />
       ) : (
-        <div className="-mx-4 sm:-mx-5">
+        <div data-tour="feed-list" className="-mx-4 sm:-mx-5">
           {items.map((post) => (
             <PostCard
               key={post.id}

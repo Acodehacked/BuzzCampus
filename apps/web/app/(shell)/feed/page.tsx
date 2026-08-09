@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CATEGORY, Surface, cn, type CategoryKey } from "@buzz/ui";
 import { FeedView } from "../../../components/feed/FeedView";
 import { ScarcityRail } from "../../../components/feed/ScarcityRail";
+import { FeedTour } from "../../../components/tour/FeedTour";
 import { api } from "../../../lib/trpc/server";
 import { auth } from "../../../server/auth";
 
@@ -27,6 +29,10 @@ export default async function FeedPage({
   const firstName = session?.user?.name?.split(" ")[0] ?? "there";
 
   return (
+    <>
+      <Suspense fallback={null}>
+        <FeedTour />
+      </Suspense>
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_17rem]">
       <div className="min-w-0">
         <div className="mb-4">
@@ -96,5 +102,6 @@ export default async function FeedPage({
         </Surface>
       </aside>
     </div>
+    </>
   );
 }

@@ -180,9 +180,32 @@ going green and serving errors.
 
 ## Step 4 — Environment variables
 
-**Environment Variables** tab. All of these are **runtime** variables — leave
-"Build Variable" unchecked for every one of them. Nothing secret is needed to
-build the image.
+**Environment Variables** tab.
+
+> ### Leave "Build Variable" UNCHECKED on every one of these
+>
+> This matters for two separate reasons, and getting it wrong is the most
+> common way this deploy fails.
+>
+> **It breaks the build.** Coolify injects an `ARG` line for every build
+> variable into *each stage* of the Dockerfile, and `ARG` values are visible
+> to `RUN`. If `NODE_ENV=production` is among them, npm reads it as
+> `--omit=dev` and `npm ci` silently skips devDependencies — then the build
+> dies with `Cannot find module 'tailwindcss'`. Tailwind, PostCSS and
+> Autoprefixer are all dev dependencies of a Next app. (The Dockerfile now
+> pins `npm ci --include=dev` so this can't happen, but there's no reason to
+> invite it.)
+>
+> **It leaks secrets.** Build arguments are recorded in the image's layer
+> history. Anyone who can pull the image can read `AUTH_SECRET` and
+> `DATABASE_URL` back out of it. Docker warns about this during the build:
+> `SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive
+> data`. If you have already deployed with `AUTH_SECRET` as a build
+> variable, **rotate it** — generate a new one, uncheck the box, redeploy.
+> Everyone gets signed out, which is the point.
+>
+> Nothing secret is needed to build this image. The database is only touched
+> at runtime.
 
 ```bash
 # Paste the INTERNAL url from step 2
@@ -324,6 +347,14 @@ visiting (http vs https, or a missing subdomain).
 `CAMPUS_EMAIL_DOMAINS` doesn't include that domain. Remember it's a list of
 *domains*, comma-separated — subdomains are automatic, so list
 `sjcetpalai.ac.in`, not `es.sjcetpalai.ac.in`.
+
+**Build fails with `Cannot find module 'tailwindcss'`** (or `postcss`, or
+`autoprefixer`). The build ran without devDependencies. Coolify injects every
+**build variable** into each Dockerfile stage as an `ARG`, and if
+`NODE_ENV=production` is among them npm reads it as `--omit=dev`. Uncheck
+"Build Variable" on your environment variables — none of them are needed at
+build time. The Dockerfile also pins `npm ci --include=dev`, so an up-to-date
+checkout is immune to this; if you're seeing it, pull the latest `Dockerfile`.
 
 **Build runs out of memory on a small VPS.** Next builds are memory-hungry.
 Add swap on the server:

@@ -40,7 +40,7 @@ export function LoginForm() {
 
   return (
     <>
-      <h1 className="text-2xl tracking-tight text-text-primary-dark">
+      <h1 className="display-xl text-3xl text-text-primary-dark">
         Welcome back
       </h1>
       <p className="mt-1.5 text-sm text-text-muted">
@@ -83,7 +83,8 @@ export function LoginForm() {
 
         <Button
           type="submit"
-          variant="primary"
+          variant="pop-light"
+          size="lg"
           className="w-full justify-center"
           loading={pending}
         >

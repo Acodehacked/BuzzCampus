@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
 import { CATEGORY, CATEGORY_KEYS, type CategoryKey } from "../utils/category";
 
@@ -8,6 +9,10 @@ import { CATEGORY, CATEGORY_KEYS, type CategoryKey } from "../utils/category";
  * first thing selected — the mixed feed is the product, and the filters are
  * a narrowing of it, not three tabs pretending to be one screen
  * (docs/PRD.md §3).
+ *
+ * The selected chip carries a shared layout element, so switching category
+ * slides the highlight across rather than blinking it — the row reads as
+ * one control with a position, not four independent buttons.
  */
 export function FeedFilterChips({
   value,
@@ -24,26 +29,28 @@ export function FeedFilterChips({
     <div
       role="tablist"
       aria-label="Filter the feed by category"
-      className={cn("flex items-center gap-1 overflow-x-auto", className)}
+      className={cn("flex items-center gap-1.5 overflow-x-auto pb-0.5", className)}
     >
       <Chip
         selected={value === "all"}
         onClick={() => onChange("all")}
         count={counts?.all}
         label="All"
+        highlight="bg-text-primary-dark"
+        selectedText="text-graphite-950"
       />
       {CATEGORY_KEYS.map((key) => {
         const tokens = CATEGORY[key];
-        const selected = value === key;
         return (
           <Chip
             key={key}
-            selected={selected}
+            selected={value === key}
             onClick={() => onChange(key)}
             count={counts?.[key]}
             label={tokens.label}
             dot={tokens.dot}
-            selectedClass={cn(tokens.tagBg, tokens.tagText)}
+            highlight={tokens.edge}
+            selectedText="text-graphite-950"
           />
         );
       })}
@@ -57,14 +64,16 @@ function Chip({
   onClick,
   count,
   dot,
-  selectedClass,
+  highlight,
+  selectedText,
 }: {
   label: string;
   selected: boolean;
   onClick: () => void;
   count?: number;
   dot?: string;
-  selectedClass?: string;
+  highlight: string;
+  selectedText: string;
 }) {
   return (
     <button
@@ -73,23 +82,45 @@ function Chip({
       aria-selected={selected}
       onClick={onClick}
       className={cn(
-        "inline-flex shrink-0 items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs",
-        "transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-muted",
+        "relative inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold",
+        "transition-colors duration-150 active:scale-[0.96]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-muted",
         selected
-          ? cn(
-              "border-transparent",
-              selectedClass ?? "bg-text-primary-dark/10 text-text-primary-dark",
-            )
-          : "border-graphite-700 text-text-muted hover:border-text-muted/50 hover:text-text-primary-dark",
+          ? selectedText
+          : "text-text-muted hover:bg-graphite-800 hover:text-text-primary-dark",
       )}
     >
-      {dot ? (
-        <span className={cn("h-1.5 w-1.5 rounded-sm", dot)} aria-hidden />
+      {selected ? (
+        <motion.span
+          layoutId="feed-chip-highlight"
+          aria-hidden
+          className={cn("absolute inset-0 rounded-full", highlight)}
+          transition={{ type: "spring", stiffness: 400, damping: 34 }}
+        />
       ) : null}
-      {label}
-      {typeof count === "number" ? (
-        <span className="font-mono tabular-nums opacity-60">{count}</span>
-      ) : null}
+
+      <span className="relative flex items-center gap-1.5">
+        {dot ? (
+          <span
+            className={cn(
+              "h-1.5 w-1.5 rounded-full transition-colors",
+              selected ? "bg-graphite-950/60" : dot,
+            )}
+            aria-hidden
+          />
+        ) : null}
+        {label}
+        {typeof count === "number" ? (
+          <span
+            className={cn(
+              "font-mono tabular-nums",
+              selected ? "opacity-60" : "opacity-50",
+            )}
+          >
+            {count}
+          </span>
+        ) : null}
+      </span>
     </button>
   );
 }
