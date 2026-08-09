@@ -1,0 +1,33 @@
+{
+  "name": "buzz",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Buzz — one campus feed. Ask for help, give a hand.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@buzz/web",
+    "build": "npm run build --workspace=@buzz/web",
+    "start": "npm run start --workspace=@buzz/web",
+    "lint": "npm run lint --workspace=@buzz/web",
+    "typecheck": "tsc -b --pretty",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "npm run generate --workspace=@buzz/db",
+    "db:push": "npm run push --workspace=@buzz/db",
+    "db:migrate": "npm run migrate --workspace=@buzz/db",
+    "db:seed": "npm run seed --workspace=@buzz/db",
+    "db:studio": "npm run studio --workspace=@buzz/db"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "nx": "^20.3.1",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=20.11"
+  }
+}

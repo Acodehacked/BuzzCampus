@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Font loading: use next/font in app/layout.tsx to load General Sans (or
+  Space Grotesk as fallback), Inter, and IBM Plex Mono, and expose them as
+  the CSS variables referenced in tailwind.config.ts:
+
+    --font-general-sans
+    --font-inter
+    --font-plex-mono
+
+  Do not load fonts via a <link> tag or @import in this file — use
+  next/font so they're self-hosted and don't introduce layout shift.
+*/
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+@layer base {
+  body {
+    @apply bg-graphite-950 text-text-primary-dark font-sans antialiased;
+  }
+
+  html.light body {
+    @apply bg-paper-50 text-text-primary-light;
+  }
+
+  /* Reserve the display font for hero/section headings only — see
+     DESIGN_SYSTEM.md Section 1. Do not apply font-display globally. */
+  h1, h2 {
+    @apply font-display;
+  }
+
+  /* Post IDs, credit amounts, timestamps, SLA codes — see
+     DESIGN_SYSTEM.md Section 2 (Typography). */
+  .data-mono {
+    @apply font-mono tabular-nums;
+  }
+}
+
+@layer components {
+  /* One shared border token pattern — prefer this over ad hoc box-shadow.
+     See DESIGN_SYSTEM.md Section 2 (Elevation) and Section 3. */
+  .surface {
+    @apply bg-graphite-800 border border-graphite-700 rounded-md;
+  }
+
+  html.light .surface {
+    @apply bg-paper-100 border-paper-200;
+  }
+}

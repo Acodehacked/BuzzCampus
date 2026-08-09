@@ -1,0 +1,305 @@
+{
+  "nodes": {
+    "@buzz/core": {
+      "name": "@buzz/core",
+      "type": "lib",
+      "data": {
+        "root": "packages/core",
+        "name": "@buzz/core",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "test"
+            ]
+          },
+          "js": {
+            "packageName": "@buzz/core",
+            "packageExports": {
+              ".": "./src/index.ts",
+              "./*": "./src/*"
+            },
+            "packageMain": "./src/index.ts",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "test": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test"
+            },
+            "metadata": {
+              "scriptContent": "vitest run",
+              "runCommand": "npm run test"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "inputs": [
+              "default",
+              "^production"
+            ],
+            "cache": true
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "@buzz/db": {
+      "name": "@buzz/db",
+      "type": "lib",
+      "data": {
+        "root": "packages/db",
+        "name": "@buzz/db",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "generate",
+              "push",
+              "migrate",
+              "seed",
+              "studio"
+            ]
+          },
+          "js": {
+            "packageName": "@buzz/db",
+            "packageExports": {
+              ".": "./src/index.ts",
+              "./schema": "./src/schema.ts",
+              "./client": "./src/client.ts"
+            },
+            "packageMain": "./src/index.ts",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "generate": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "generate"
+            },
+            "metadata": {
+              "scriptContent": "drizzle-kit generate",
+              "runCommand": "npm run generate"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "push": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "push"
+            },
+            "metadata": {
+              "scriptContent": "drizzle-kit push",
+              "runCommand": "npm run push"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "migrate": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "migrate"
+            },
+            "metadata": {
+              "scriptContent": "tsx src/migrate.ts",
+              "runCommand": "npm run migrate"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "seed": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "seed"
+            },
+            "metadata": {
+              "scriptContent": "tsx src/seed.ts",
+              "runCommand": "npm run seed"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "studio": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "studio"
+            },
+            "metadata": {
+              "scriptContent": "drizzle-kit studio",
+              "runCommand": "npm run studio"
+            },
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "@buzz/ui": {
+      "name": "@buzz/ui",
+      "type": "lib",
+      "data": {
+        "root": "packages/ui",
+        "name": "@buzz/ui",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@buzz/ui",
+            "packageExports": {
+              ".": "./src/index.ts",
+              "./*": "./src/*"
+            },
+            "packageMain": "./src/index.ts",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {},
+        "implicitDependencies": []
+      }
+    },
+    "@buzz/web": {
+      "name": "@buzz/web",
+      "type": "lib",
+      "data": {
+        "root": "apps/web",
+        "name": "@buzz/web",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "dev",
+              "build",
+              "start",
+              "lint",
+              "typecheck"
+            ]
+          },
+          "js": {
+            "packageName": "@buzz/web",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "dev": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "dev"
+            },
+            "metadata": {
+              "scriptContent": "next dev",
+              "runCommand": "npm run dev"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "metadata": {
+              "scriptContent": "next build",
+              "runCommand": "npm run build"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "cache": true
+          },
+          "start": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start"
+            },
+            "metadata": {
+              "scriptContent": "next start",
+              "runCommand": "npm run start"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "lint"
+            },
+            "metadata": {
+              "scriptContent": "next lint",
+              "runCommand": "npm run lint"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "cache": true
+          },
+          "typecheck": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "typecheck"
+            },
+            "metadata": {
+              "scriptContent": "tsc --noEmit",
+              "runCommand": "npm run typecheck"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "cache": true
+          }
+        },
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "@buzz/core": [
+      {
+        "source": "@buzz/core",
+        "target": "@buzz/db",
+        "type": "static"
+      }
+    ],
+    "@buzz/db": [],
+    "@buzz/ui": [],
+    "@buzz/web": [
+      {
+        "source": "@buzz/web",
+        "target": "@buzz/core",
+        "type": "static"
+      },
+      {
+        "source": "@buzz/web",
+        "target": "@buzz/db",
+        "type": "static"
+      },
+      {
+        "source": "@buzz/web",
+        "target": "@buzz/ui",
+        "type": "static"
+      }
+    ]
+  },
+  "version": "6.0",
+  "errors": [],
+  "computedAt": 1786232471344
+}

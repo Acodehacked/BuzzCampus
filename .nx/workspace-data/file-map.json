@@ -1,0 +1,219 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.4",
+  "pathMappings": {
+    "@buzz/db": [
+      "packages/db/src/index.ts"
+    ],
+    "@buzz/db/*": [
+      "packages/db/src/*"
+    ],
+    "@buzz/core": [
+      "packages/core/src/index.ts"
+    ],
+    "@buzz/core/*": [
+      "packages/core/src/*"
+    ],
+    "@buzz/ui": [
+      "packages/ui/src/index.ts"
+    ],
+    "@buzz/ui/*": [
+      "packages/ui/src/*"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "@buzz/ui": [
+        {
+          "file": "packages/ui/package.json",
+          "hash": "322080224694591143"
+        }
+      ],
+      "@buzz/db": [
+        {
+          "file": "packages/db/drizzle.config.ts",
+          "hash": "17233532386531418433"
+        },
+        {
+          "file": "packages/db/package.json",
+          "hash": "12461281336270328055"
+        },
+        {
+          "file": "packages/db/src/client.ts",
+          "hash": "7249684994204041047"
+        },
+        {
+          "file": "packages/db/src/index.ts",
+          "hash": "3526931129931031584"
+        },
+        {
+          "file": "packages/db/src/migrate.ts",
+          "hash": "16823076800325716683"
+        },
+        {
+          "file": "packages/db/src/schema.ts",
+          "hash": "1955472809513267287"
+        }
+      ],
+      "@buzz/core": [
+        {
+          "file": "packages/core/package.json",
+          "hash": "14042115467830760346",
+          "deps": [
+            "@buzz/db"
+          ]
+        },
+        {
+          "file": "packages/core/src/__tests__/integration.test.ts",
+          "hash": "4254044220380967509"
+        },
+        {
+          "file": "packages/core/src/__tests__/ledger.test.ts",
+          "hash": "17504728875221228589"
+        },
+        {
+          "file": "packages/core/src/__tests__/lifecycle.test.ts",
+          "hash": "17511053850593274850"
+        },
+        {
+          "file": "packages/core/src/__tests__/rules.test.ts",
+          "hash": "9385467097686707374"
+        },
+        {
+          "file": "packages/core/src/constants.ts",
+          "hash": "17746724048133409219"
+        },
+        {
+          "file": "packages/core/src/digest.ts",
+          "hash": "9206442829886439666"
+        },
+        {
+          "file": "packages/core/src/errors.ts",
+          "hash": "3272213300981019987"
+        },
+        {
+          "file": "packages/core/src/index.ts",
+          "hash": "3712341798814232719"
+        },
+        {
+          "file": "packages/core/src/ledger.ts",
+          "hash": "16996473435963642235"
+        },
+        {
+          "file": "packages/core/src/lifecycle.ts",
+          "hash": "5913820477359176975"
+        },
+        {
+          "file": "packages/core/src/money.ts",
+          "hash": "5842269977863875116"
+        },
+        {
+          "file": "packages/core/src/policy.ts",
+          "hash": "4034669740127058617"
+        },
+        {
+          "file": "packages/core/src/ranking.ts",
+          "hash": "2301482688101764779"
+        },
+        {
+          "file": "packages/core/src/scarcity.ts",
+          "hash": "5396505576675006441"
+        },
+        {
+          "file": "packages/core/src/score.ts",
+          "hash": "10967478180535689298"
+        },
+        {
+          "file": "packages/core/src/sla.ts",
+          "hash": "8780373334141141848"
+        },
+        {
+          "file": "packages/core/src/validation/auth.ts",
+          "hash": "8702851910279125530"
+        },
+        {
+          "file": "packages/core/src/validation/build.ts",
+          "hash": "9409438486458659387"
+        },
+        {
+          "file": "packages/core/src/validation/index.ts",
+          "hash": "15440673825188780319"
+        },
+        {
+          "file": "packages/core/src/validation/post.ts",
+          "hash": "5579195400432414634"
+        }
+      ],
+      "@buzz/web": [
+        {
+          "file": "apps/web/package.json",
+          "hash": "14455300408681755641",
+          "deps": [
+            "@buzz/core",
+            "@buzz/db",
+            "@buzz/ui"
+          ]
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": "Buzz_Complete_PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": "CLAUDE.md",
+        "hash": "16134674678241035431"
+      },
+      {
+        "file": "DESIGN_SYSTEM.md",
+        "hash": "7479891523772999025"
+      },
+      {
+        "file": "docs/ARCHITECTURE.md",
+        "hash": "14403268010336438767"
+      },
+      {
+        "file": "docs/BUILD_PLAN.md",
+        "hash": "16070165764627963390"
+      },
+      {
+        "file": "docs/DESIGN_SYSTEM.md",
+        "hash": "7479891523772999025"
+      },
+      {
+        "file": "docs/PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": "globals.css",
+        "hash": "12034264586271930419"
+      },
+      {
+        "file": "nx.json",
+        "hash": "14670132124483104828"
+      },
+      {
+        "file": "package.json",
+        "hash": "13925306886154058701"
+      },
+      {
+        "file": "schema.ts",
+        "hash": "11727469964143703918"
+      },
+      {
+        "file": "tailwind.config.ts",
+        "hash": "6696237629310940894"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "12186652005718117470"
+      },
+      {
+        "file": "vitest.config.ts",
+        "hash": "16192073503305922962"
+      }
+    ]
+  }
+}

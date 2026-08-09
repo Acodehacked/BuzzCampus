@@ -1,0 +1,12 @@
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.268Z - Started listening on: \\.\pipe\nx\C:\Users\abina\AppData\Local\Temp\a96a07e680951a87c546\d.sock
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.274Z - [WATCHER]: Subscribed to changes within: E:\PROJECTS\BuzzCampus (native)
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.280Z - Established a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.282Z - Established a connection. Number of open connections: 2
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.287Z - Closed a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.291Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.295Z - Done responding to the client Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.304Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 13.
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.304Z - Closed a connection. Number of open connections: 0
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.306Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (sources)
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.308Z - [WATCHER]: Stopping the watcher for E:\PROJECTS\BuzzCampus (outputs)
+[NX v20.8.4 Daemon Server] - 2026-08-08T23:41:08.309Z - Server stopped because: "Request to shutdown"
