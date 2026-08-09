@@ -25,27 +25,75 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": ".env.example",
+        "hash": "16219353608393898702"
+      },
+      {
+        "file": "schema.ts",
+        "hash": "11727469964143703918"
+      },
+      {
+        "file": "package.json",
+        "hash": "11167407003127101259"
+      },
+      {
+        "file": "scripts/seed.mts",
+        "hash": "9835303859782379544"
+      },
+      {
         "file": "globals.css",
         "hash": "12034264586271930419"
       },
       {
-        "file": "docs/DESIGN_SYSTEM.md",
-        "hash": "10531337959359986093"
+        "file": "docs/ARCHITECTURE.md",
+        "hash": "14403268010336438767"
+      },
+      {
+        "file": "scripts/migrate.mjs",
+        "hash": "13465166708325858567"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "7071996166724889697"
+      },
+      {
+        "file": "docker-entrypoint.sh",
+        "hash": "10949061703129557134"
+      },
+      {
+        "file": "docs/BUILD_PLAN.md",
+        "hash": "9938770794201837375"
       },
       {
         "file": "CLAUDE.md",
         "hash": "16134674678241035431"
       },
       {
+        "file": "tsconfig.base.json",
+        "hash": "5754650927598303120"
+      },
+      {
+        "file": "Buzz_Complete_PRD.md",
+        "hash": "10220418756604540923"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "7451656278145667688"
+      },
+      {
+        "file": "nx.json",
+        "hash": "14670132124483104828"
+      },
+      {
         "file": "HOWTOHOST.md",
         "hash": "7192107132397258656"
       },
       {
-        "file": ".env.example",
-        "hash": "16219353608393898702"
+        "file": "README.md",
+        "hash": "3369714621364422324"
       },
       {
-        "file": "Buzz_Complete_PRD.md",
+        "file": "docs/PRD.md",
         "hash": "10220418756604540923"
       },
       {
@@ -53,72 +101,28 @@
         "hash": "11627161708463498695"
       },
       {
-        "file": ".dockerignore",
-        "hash": "7071996166724889697"
-      },
-      {
-        "file": "package.json",
-        "hash": "11167407003127101259"
-      },
-      {
-        "file": "docs/ARCHITECTURE.md",
-        "hash": "14403268010336438767"
-      },
-      {
-        "file": "nx.json",
-        "hash": "14670132124483104828"
-      },
-      {
-        "file": "docs/PRD.md",
-        "hash": "10220418756604540923"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "3736080359999357676"
-      },
-      {
-        "file": "README.md",
-        "hash": "337064644856762371"
-      },
-      {
-        "file": "schema.ts",
-        "hash": "11727469964143703918"
-      },
-      {
-        "file": "scripts/seed.mts",
-        "hash": "9835303859782379544"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "5754650927598303120"
-      },
-      {
-        "file": "tailwind.config.ts",
-        "hash": "6696237629310940894"
-      },
-      {
-        "file": "docker-entrypoint.sh",
-        "hash": "10949061703129557134"
+        "file": "docs/DESIGN_SYSTEM.md",
+        "hash": "10531337959359986093"
       },
       {
         "file": "vitest.config.ts",
         "hash": "7812567901636579527"
       },
       {
+        "file": "package-lock.json",
+        "hash": "3736080359999357676"
+      },
+      {
+        "file": "docs/screenshots/README.md",
+        "hash": "93220932492752681"
+      },
+      {
+        "file": "tailwind.config.ts",
+        "hash": "6696237629310940894"
+      },
+      {
         "file": "docker-compose.yml",
         "hash": "2249984800845579397"
-      },
-      {
-        "file": "scripts/migrate.mjs",
-        "hash": "13465166708325858567"
-      },
-      {
-        "file": "Dockerfile",
-        "hash": "7451656278145667688"
-      },
-      {
-        "file": "docs/BUILD_PLAN.md",
-        "hash": "9938770794201837375"
       },
       {
         "file": "DESIGN_SYSTEM.md",
@@ -309,7 +313,7 @@
         },
         {
           "file": "apps/web/components/landing/ConvergePanel.tsx",
-          "hash": "16384446794888643441"
+          "hash": "7996822286450866296"
         },
         {
           "file": "apps/web/components/landing/HeroPanel.tsx",

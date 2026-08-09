@@ -31,9 +31,13 @@ export function ConvergePanel() {
     // the animated version, and only then set the split starting layout.
     scope.current?.setAttribute("data-anim", "on");
 
-    gsap.set(".stack-campus", { rotate: -7, xPercent: 0 });
-    gsap.set(".stack-skills", { rotate: 3 });
-    gsap.set(".stack-builds", { rotate: 8 });
+    // A small tilt, not a big one. At 7° a 2px black border on saturated
+    // yellow stops reading as "a deck of cards on a desk" and starts
+    // reading as "the layout is broken" — the rotation fights the crisp
+    // geometry of the hard shadow. 2° keeps the gesture, loses the mess.
+    gsap.set(".stack-campus", { rotate: -2, xPercent: 0 });
+    gsap.set(".stack-skills", { rotate: 0.5 });
+    gsap.set(".stack-builds", { rotate: 2 });
     gsap.set(".merged-feed", { opacity: 0 });
 
     const timeline = gsap.timeline({
@@ -71,7 +75,9 @@ export function ConvergePanel() {
       data-anim="off"
       className="pop-panel grain relative flex min-h-screen items-center overflow-hidden bg-pop-yellow"
     >
-      <div className="shell-column relative z-10 w-full py-16">
+      {/* pt-32: the section pins to the top of the viewport, so its first
+          line would otherwise sit under the fixed floating nav. */}
+      <div className="shell-column relative z-10 w-full pb-16 pt-32">
         <p className="converge-label mx-auto mb-8 max-w-xl text-center text-base font-semibold text-ink/70 sm:text-lg">
           Three problems. Most campuses buy three tools for them — and most
           students only ever open one.
@@ -93,7 +99,7 @@ export function ConvergePanel() {
                   {stack.items.map((item) => (
                     <div
                       key={item}
-                      className="rounded-xl border-2 border-ink bg-white/90 px-3 py-2.5 text-[0.7rem] font-medium leading-snug shadow-pop-sm sm:text-xs"
+                      className="rounded-xl border-2 border-ink bg-white px-3.5 py-3 text-[0.72rem] font-medium leading-snug shadow-pop-sm sm:text-xs"
                     >
                       <span
                         className={cn(
