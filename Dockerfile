@@ -19,7 +19,18 @@ COPY packages/db/package.json ./packages/db/
 COPY packages/core/package.json ./packages/core/
 COPY packages/ui/package.json ./packages/ui/
 
-RUN npm ci
+# `--include=dev` is load-bearing, not decoration.
+#
+# npm treats NODE_ENV=production as --omit=dev, and deployment platforms
+# inject NODE_ENV into the build: Coolify copies every environment variable
+# into each stage as an ARG, and ARG values are visible to RUN. Without this
+# flag, `npm ci` silently skips devDependencies and the build dies later
+# with "Cannot find module 'tailwindcss'" — tailwind, postcss, autoprefixer
+# and typescript are all dev dependencies of a Next app.
+#
+# It costs nothing when NODE_ENV isn't set, and the dev dependencies never
+# reach the runtime image anyway: only the standalone bundle is copied out.
+RUN npm ci --include=dev
 
 
 # ── builder ────────────────────────────────────────────────────────────
